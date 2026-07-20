@@ -7,6 +7,7 @@ import { LessonDetail } from './pages/LessonDetail'
 import { Drills } from './pages/Drills'
 import { Quizzes } from './pages/Quizzes'
 import { QuizPlay } from './pages/QuizPlay'
+import { Account } from './pages/Account'
 import { NotFound } from './pages/NotFound'
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path="/drills" element={<Drills />} />
           <Route path="/quizzes" element={<Quizzes />} />
           <Route path="/quizzes/:quizId" element={<QuizPlay />} />
+          <Route path="/account" element={<Account />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
