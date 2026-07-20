@@ -25,7 +25,7 @@ npm run lint     # run oxlint
 ## Deployment
 
 The app is a client-rendered SPA deployed to **Cloudflare Workers static assets** (config in
-[`wrangler.jsonc`](./wrangler.jsonc)) and served from the custom domain `aceacademy.com`. It
+[`wrangler.jsonc`](./wrangler.jsonc)) and served from the custom domain `acetennis.academy`. It
 uses `BrowserRouter` at the root path; Cloudflare's `not_found_handling: single-page-application`
 serves `index.html` for unmatched paths so deep links and refreshes work.
 

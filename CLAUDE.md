@@ -3,7 +3,7 @@
 A React 19 + TypeScript + Vite tennis learning app. Static curriculum content,
 local-first progress, optional Supabase accounts for cross-device sync.
 Deployed to Cloudflare Workers static assets at the root path `/`, served from the
-custom domain `aceacademy.com`.
+custom domain `acetennis.academy`.
 
 ## Development is test-driven
 
