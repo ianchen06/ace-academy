@@ -39,6 +39,35 @@ test.describe('accounts', () => {
     await expect(page.locator('.auth-info')).toContainText(/Check your email to confirm/)
   })
 
+  test('a visitor can request a password reset link', async ({ page, supabase }) => {
+    void supabase
+    await page.goto('/account')
+    await page.getByRole('button', { name: /Forgot password/i }).click()
+
+    await expect(page.getByRole('heading', { name: /Reset your password/i })).toBeVisible()
+    await expect(page.getByLabel('Password')).toHaveCount(0)
+
+    await page.getByLabel('Email').fill(TEST_EMAIL)
+    await page.getByRole('button', { name: /Send reset link/i }).click()
+
+    await expect(page.locator('.auth-info')).toContainText(/reset link is on its way/i)
+  })
+
+  test('the reset-password page updates the password and returns to the account page', async ({ page, supabase }) => {
+    void supabase
+    // The real flow lands here in a recovery session from the email link; signing
+    // in first gives the stub an active session for updateUser to act on.
+    await signIn(page)
+    await expect(page.getByRole('button', { name: 'Sign out' })).toBeVisible()
+
+    await page.goto('/reset-password')
+    await page.getByLabel('New password').fill('brandnew123')
+    await page.getByLabel('Confirm password').fill('brandnew123')
+    await page.getByRole('button', { name: /Update password/i }).click()
+
+    await expect(page).toHaveURL(/\/account$/)
+  })
+
   test('a signed-in user can sign out', async ({ page, supabase }) => {
     void supabase
     await signIn(page)

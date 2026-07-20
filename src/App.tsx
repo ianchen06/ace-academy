@@ -8,6 +8,7 @@ import { Drills } from './pages/Drills'
 import { Quizzes } from './pages/Quizzes'
 import { QuizPlay } from './pages/QuizPlay'
 import { Account } from './pages/Account'
+import { ResetPassword } from './pages/ResetPassword'
 import { NotFound } from './pages/NotFound'
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/quizzes" element={<Quizzes />} />
           <Route path="/quizzes/:quizId" element={<QuizPlay />} />
           <Route path="/account" element={<Account />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

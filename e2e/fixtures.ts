@@ -107,6 +107,14 @@ async function installSupabaseStub(page: Page): Promise<SupabaseStub> {
       return route.fulfill({ status: 204, headers: corsHeaders, body: '' })
     }
 
+    if (pathname === '/auth/v1/recover') {
+      // GoTrue always returns 200 here regardless of whether the email exists,
+      // so the client can't be used to enumerate accounts.
+      return json({})
+    }
+
+    // GET returns the current user; PUT (updateUser) changes the password and
+    // echoes the updated user back.
     if (pathname === '/auth/v1/user') {
       return json(session().user)
     }

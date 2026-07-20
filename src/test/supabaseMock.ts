@@ -66,6 +66,8 @@ export function createSupabaseMock(options: SupabaseMockOptions = {}) {
     signUp: vi.fn().mockResolvedValue({ data: {}, error: null }),
     signInWithPassword: vi.fn().mockResolvedValue({ data: {}, error: null }),
     signOut: vi.fn().mockResolvedValue({ error: null }),
+    resetPasswordForEmail: vi.fn().mockResolvedValue({ data: {}, error: null }),
+    updateUser: vi.fn().mockResolvedValue({ data: {}, error: null }),
   }
 
   return {

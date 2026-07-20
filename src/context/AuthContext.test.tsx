@@ -86,6 +86,30 @@ describe('AuthProvider — backend not configured', () => {
     expect(screen.getByTestId('user')).toHaveTextContent('anonymous')
   })
 
+  it('returns an explanatory error from resetPasswordForEmail instead of throwing', async () => {
+    let result: { error: string | null } | undefined
+    function Capture() {
+      const { resetPasswordForEmail } = useAuth()
+      return <button onClick={async () => { result = await resetPasswordForEmail('a@b.com') }}>go</button>
+    }
+    const user = userEvent.setup()
+    render(<AuthProvider><Capture /></AuthProvider>)
+    await user.click(screen.getByRole('button', { name: 'go' }))
+    expect(result?.error).toMatch(/not configured/i)
+  })
+
+  it('returns an explanatory error from updatePassword instead of throwing', async () => {
+    let result: { error: string | null } | undefined
+    function Capture() {
+      const { updatePassword } = useAuth()
+      return <button onClick={async () => { result = await updatePassword('pw123456') }}>go</button>
+    }
+    const user = userEvent.setup()
+    render(<AuthProvider><Capture /></AuthProvider>)
+    await user.click(screen.getByRole('button', { name: 'go' }))
+    expect(result?.error).toMatch(/not configured/i)
+  })
+
   it('throws a helpful error when useAuth is used outside the provider', () => {
     const spy = vi.spyOn(console, 'error').mockImplementation(() => {})
     expect(() => render(<Probe />)).toThrow(/AuthProvider/i)
@@ -178,6 +202,68 @@ describe('AuthProvider — backend configured', () => {
     render(<AuthProvider><Capture /></AuthProvider>)
     await user.click(screen.getByRole('button', { name: 'go' }))
     expect(result?.error).toBe('User already registered')
+  })
+
+  it('sends a password-reset email with a redirect that respects the deploy base path', async () => {
+    const mock = configure({ session: null })
+    let result: { error: string | null } | undefined
+    function Capture() {
+      const { resetPasswordForEmail } = useAuth()
+      return <button onClick={async () => { result = await resetPasswordForEmail('a@b.com') }}>go</button>
+    }
+    const user = userEvent.setup()
+    render(<AuthProvider><Capture /></AuthProvider>)
+    await user.click(screen.getByRole('button', { name: 'go' }))
+
+    expect(mock.spies.auth.resetPasswordForEmail).toHaveBeenCalledWith('a@b.com', {
+      redirectTo: window.location.origin + import.meta.env.BASE_URL + 'reset-password',
+    })
+    expect(result?.error).toBeNull()
+  })
+
+  it('surfaces a reset-password error message', async () => {
+    const mock = configure({ session: null })
+    mock.spies.auth.resetPasswordForEmail.mockResolvedValue({ data: {}, error: { message: 'rate limited' } })
+
+    let result: { error: string | null } | undefined
+    function Capture() {
+      const { resetPasswordForEmail } = useAuth()
+      return <button onClick={async () => { result = await resetPasswordForEmail('a@b.com') }}>go</button>
+    }
+    const user = userEvent.setup()
+    render(<AuthProvider><Capture /></AuthProvider>)
+    await user.click(screen.getByRole('button', { name: 'go' }))
+    expect(result?.error).toBe('rate limited')
+  })
+
+  it('forwards the new password to updateUser', async () => {
+    const mock = configure({ session: makeSession() })
+    let result: { error: string | null } | undefined
+    function Capture() {
+      const { updatePassword } = useAuth()
+      return <button onClick={async () => { result = await updatePassword('newpw123') }}>go</button>
+    }
+    const user = userEvent.setup()
+    render(<AuthProvider><Capture /></AuthProvider>)
+    await user.click(screen.getByRole('button', { name: 'go' }))
+
+    expect(mock.spies.auth.updateUser).toHaveBeenCalledWith({ password: 'newpw123' })
+    expect(result?.error).toBeNull()
+  })
+
+  it('surfaces an update-password error message', async () => {
+    const mock = configure({ session: makeSession() })
+    mock.spies.auth.updateUser.mockResolvedValue({ data: {}, error: { message: 'weak password' } })
+
+    let result: { error: string | null } | undefined
+    function Capture() {
+      const { updatePassword } = useAuth()
+      return <button onClick={async () => { result = await updatePassword('short') }}>go</button>
+    }
+    const user = userEvent.setup()
+    render(<AuthProvider><Capture /></AuthProvider>)
+    await user.click(screen.getByRole('button', { name: 'go' }))
+    expect(result?.error).toBe('weak password')
   })
 
   it('calls through to signOut', async () => {

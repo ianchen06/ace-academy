@@ -43,6 +43,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     await supabase.auth.signOut()
   }, [])
 
+  const resetPasswordForEmail = useCallback(async (email: string) => {
+    if (!supabase) return { error: 'Backend is not configured yet.' }
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: window.location.origin + import.meta.env.BASE_URL + 'reset-password',
+    })
+    return { error: error?.message ?? null }
+  }, [])
+
+  const updatePassword = useCallback(async (password: string) => {
+    if (!supabase) return { error: 'Backend is not configured yet.' }
+    const { error } = await supabase.auth.updateUser({ password })
+    return { error: error?.message ?? null }
+  }, [])
+
   const value = useMemo<AuthContextValue>(
     () => ({
       user: (session?.user as User | undefined) ?? null,
@@ -52,8 +66,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       signUp,
       signIn,
       signOut,
+      resetPasswordForEmail,
+      updatePassword,
     }),
-    [session, loading, signUp, signIn, signOut],
+    [session, loading, signUp, signIn, signOut, resetPasswordForEmail, updatePassword],
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
