@@ -26,6 +26,9 @@ dist-ssr
 *.sln
 *.sw?
 
+# Cloudflare Wrangler
+.wrangler
+
 # Test output
 coverage
 playwright-report

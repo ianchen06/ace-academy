@@ -1,7 +1,7 @@
 import { defineConfig, devices } from '@playwright/test'
 
 const PORT = 4173
-const BASE_PATH = '/ace-academy/'
+const BASE_PATH = '/'
 
 export default defineConfig({
   testDir: './e2e',
