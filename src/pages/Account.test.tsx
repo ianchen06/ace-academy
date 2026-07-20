@@ -157,6 +157,42 @@ describe('Account — signed out', () => {
   })
 })
 
+describe('Account — forgot password', () => {
+  it('switches to forgot mode and hides the password field', async () => {
+    configure({ session: null })
+    const { user } = renderAccount()
+    await user.click(await screen.findByRole('button', { name: /Forgot password/i }))
+
+    expect(screen.getByRole('heading', { name: /Reset your password/i })).toBeInTheDocument()
+    expect(screen.getByLabelText('Email')).toBeInTheDocument()
+    expect(screen.queryByLabelText('Password')).not.toBeInTheDocument()
+  })
+
+  it('sends a reset link and shows a neutral confirmation that does not disclose the account', async () => {
+    const mock = configure({ session: null })
+    const { user } = renderAccount()
+    await user.click(await screen.findByRole('button', { name: /Forgot password/i }))
+    await user.type(screen.getByLabelText('Email'), 'a@b.com')
+    await user.click(screen.getByRole('button', { name: /Send reset link/i }))
+
+    expect(mock.spies.auth.resetPasswordForEmail).toHaveBeenCalledWith('a@b.com', expect.anything())
+    expect(await screen.findByText(/reset link is on its way/i)).toBeInTheDocument()
+  })
+
+  it('returns to sign-in and clears messages from the back link', async () => {
+    configure({ session: null })
+    const { user } = renderAccount()
+    await user.click(await screen.findByRole('button', { name: /Forgot password/i }))
+    await user.type(screen.getByLabelText('Email'), 'a@b.com')
+    await user.click(screen.getByRole('button', { name: /Send reset link/i }))
+    await screen.findByText(/reset link is on its way/i)
+
+    await user.click(screen.getByRole('button', { name: /Back to sign in/i }))
+    expect(screen.getByRole('heading', { name: 'Sign In' })).toBeInTheDocument()
+    expect(screen.queryByText(/reset link is on its way/i)).not.toBeInTheDocument()
+  })
+})
+
 describe('Account — signed in', () => {
   it('greets the signed-in user by email', async () => {
     configure({ session: makeSession() })

@@ -2,8 +2,8 @@ import { useState, type FormEvent } from 'react'
 import { useAuth } from '../hooks/useAuth'
 
 export function Account() {
-  const { user, loading, isConfigured, signIn, signUp, signOut } = useAuth()
-  const [mode, setMode] = useState<'sign-in' | 'sign-up'>('sign-in')
+  const { user, loading, isConfigured, signIn, signUp, signOut, resetPasswordForEmail } = useAuth()
+  const [mode, setMode] = useState<'sign-in' | 'sign-up' | 'forgot'>('sign-in')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
@@ -57,7 +57,12 @@ export function Account() {
     setError(null)
     setInfo(null)
     setSubmitting(true)
-    const result = mode === 'sign-in' ? await signIn(email, password) : await signUp(email, password)
+    const result =
+      mode === 'sign-in'
+        ? await signIn(email, password)
+        : mode === 'sign-up'
+          ? await signUp(email, password)
+          : await resetPasswordForEmail(email)
     setSubmitting(false)
     if (result.error) {
       setError(result.error)
@@ -66,11 +71,14 @@ export function Account() {
     if (mode === 'sign-up') {
       setInfo('Account created. Check your email to confirm, then sign in.')
     }
+    if (mode === 'forgot') {
+      setInfo('If that email has an account, a reset link is on its way.')
+    }
   }
 
   return (
     <div className="page account-page">
-      <h1>{mode === 'sign-in' ? 'Sign In' : 'Create an Account'}</h1>
+      <h1>{mode === 'sign-in' ? 'Sign In' : mode === 'sign-up' ? 'Create an Account' : 'Reset your password'}</h1>
       <p className="page-intro">
         Sign in to sync your progress across devices. Guests can still use the app — progress is
         saved locally on this device instead.
@@ -87,25 +95,47 @@ export function Account() {
             autoComplete="email"
           />
         </label>
-        <label>
-          Password
-          <input
-            type="password"
-            required
-            minLength={6}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            autoComplete={mode === 'sign-in' ? 'current-password' : 'new-password'}
-          />
-        </label>
+        {mode !== 'forgot' && (
+          <label>
+            Password
+            <input
+              type="password"
+              required
+              minLength={6}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              autoComplete={mode === 'sign-in' ? 'current-password' : 'new-password'}
+            />
+          </label>
+        )}
 
         {error && <p className="auth-error">{error}</p>}
         {info && <p className="auth-info">{info}</p>}
 
         <button type="submit" className="btn btn-primary" disabled={submitting}>
-          {submitting ? 'Please wait...' : mode === 'sign-in' ? 'Sign In' : 'Sign Up'}
+          {submitting
+            ? 'Please wait...'
+            : mode === 'sign-in'
+              ? 'Sign In'
+              : mode === 'sign-up'
+                ? 'Sign Up'
+                : 'Send reset link'}
         </button>
       </form>
+
+      {mode === 'sign-in' && (
+        <button
+          type="button"
+          className="link-btn"
+          onClick={() => {
+            setMode('forgot')
+            setError(null)
+            setInfo(null)
+          }}
+        >
+          Forgot password?
+        </button>
+      )}
 
       <button
         type="button"
@@ -116,7 +146,11 @@ export function Account() {
           setInfo(null)
         }}
       >
-        {mode === 'sign-in' ? "Don't have an account? Sign up" : 'Already have an account? Sign in'}
+        {mode === 'sign-in'
+          ? "Don't have an account? Sign up"
+          : mode === 'sign-up'
+            ? 'Already have an account? Sign in'
+            : 'Back to sign in'}
       </button>
     </div>
   )
