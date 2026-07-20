@@ -2,7 +2,7 @@ name: Deploy to Cloudflare
 
 on:
   push:
-    branches: [claude/tennis-learning-app-3xjrs5]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
