@@ -173,7 +173,10 @@ li {
 }
 
 .nav-links a {
-  padding: 8px 12px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px 14px;
   border-radius: 8px;
   color: var(--text-muted);
   font-weight: 600;
@@ -188,6 +191,55 @@ li {
 .nav-links a.active {
   color: var(--court);
   background: color-mix(in srgb, var(--court) 12%, transparent);
+}
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.nav-toggle:hover {
+  background: var(--bg);
+}
+
+.nav-toggle-bar {
+  display: block;
+  width: 20px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--text-h);
+}
+
+@media (max-width: 640px) {
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-links a {
+    width: 100%;
+    padding: 12px 14px;
+  }
 }
 
 /* ---------- Generic page ---------- */
@@ -302,7 +354,10 @@ li {
 }
 
 .chip-btn {
-  padding: 6px 12px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 6px 16px;
   border-radius: 999px;
   border: 1px solid var(--border);
   background: var(--bg-elevated);
