@@ -6,6 +6,7 @@ import { AuthContext, type AuthContextValue } from './authContextDef'
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null)
   const [loading, setLoading] = useState(isSupabaseConfigured)
+  const [passwordRecovery, setPasswordRecovery] = useState(false)
 
   useEffect(() => {
     if (!supabase) return
@@ -15,8 +16,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setLoading(false)
     })
 
-    const { data: subscription } = supabase.auth.onAuthStateChange((_event, newSession) => {
+    const { data: subscription } = supabase.auth.onAuthStateChange((event, newSession) => {
       setSession(newSession)
+      if (event === 'PASSWORD_RECOVERY') setPasswordRecovery(true)
     })
 
     return () => subscription.subscription.unsubscribe()
@@ -39,17 +41,35 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     await supabase.auth.signOut()
   }, [])
 
+  const resetPassword = useCallback(async (email: string) => {
+    if (!supabase) return { error: 'Backend is not configured yet.' }
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}${window.location.pathname}#/account`,
+    })
+    return { error: error?.message ?? null }
+  }, [])
+
+  const updatePassword = useCallback(async (password: string) => {
+    if (!supabase) return { error: 'Backend is not configured yet.' }
+    const { error } = await supabase.auth.updateUser({ password })
+    if (!error) setPasswordRecovery(false)
+    return { error: error?.message ?? null }
+  }, [])
+
   const value = useMemo<AuthContextValue>(
     () => ({
       user: (session?.user as User | undefined) ?? null,
       session,
       loading,
       isConfigured: isSupabaseConfigured,
+      passwordRecovery,
       signUp,
       signIn,
       signOut,
+      resetPassword,
+      updatePassword,
     }),
-    [session, loading, signUp, signIn, signOut],
+    [session, loading, passwordRecovery, signUp, signIn, signOut, resetPassword, updatePassword],
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

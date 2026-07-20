@@ -902,6 +902,7 @@ li {
 }
 
 .link-btn {
+  display: block;
   background: none;
   border: none;
   color: var(--court);
@@ -909,6 +910,10 @@ li {
   font-size: 0.85rem;
   cursor: pointer;
   padding: 0;
+}
+
+.link-btn + .link-btn {
+  margin-top: 8px;
 }
 
 .link-btn:hover {

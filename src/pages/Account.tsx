@@ -2,8 +2,9 @@ import { useState, type FormEvent } from 'react'
 import { useAuth } from '../hooks/useAuth'
 
 export function Account() {
-  const { user, loading, isConfigured, signIn, signUp, signOut } = useAuth()
-  const [mode, setMode] = useState<'sign-in' | 'sign-up'>('sign-in')
+  const { user, loading, isConfigured, passwordRecovery, signIn, signUp, signOut, resetPassword, updatePassword } =
+    useAuth()
+  const [mode, setMode] = useState<'sign-in' | 'sign-up' | 'forgot'>('sign-in')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
@@ -27,6 +28,53 @@ export function Account() {
       <div className="page account-page">
         <h1>Account</h1>
         <p className="page-intro">Loading...</p>
+      </div>
+    )
+  }
+
+  if (passwordRecovery) {
+    const handleUpdate = async (e: FormEvent) => {
+      e.preventDefault()
+      setError(null)
+      setInfo(null)
+      setSubmitting(true)
+      const result = await updatePassword(password)
+      setSubmitting(false)
+      if (result.error) {
+        setError(result.error)
+        return
+      }
+      setPassword('')
+      setInfo('Your password has been updated. You are now signed in.')
+    }
+
+    return (
+      <div className="page account-page">
+        <h1>Set a New Password</h1>
+        <p className="page-intro">
+          Choose a new password for your account. Once saved, you'll stay signed in on this device.
+        </p>
+
+        <form className="auth-form" onSubmit={(e) => void handleUpdate(e)}>
+          <label>
+            New password
+            <input
+              type="password"
+              required
+              minLength={6}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              autoComplete="new-password"
+            />
+          </label>
+
+          {error && <p className="auth-error">{error}</p>}
+          {info && <p className="auth-info">{info}</p>}
+
+          <button type="submit" className="btn btn-primary" disabled={submitting}>
+            {submitting ? 'Please wait...' : 'Update password'}
+          </button>
+        </form>
       </div>
     )
   }
@@ -57,6 +105,16 @@ export function Account() {
     setError(null)
     setInfo(null)
     setSubmitting(true)
+    if (mode === 'forgot') {
+      const result = await resetPassword(email)
+      setSubmitting(false)
+      if (result.error) {
+        setError(result.error)
+        return
+      }
+      setInfo('If an account exists for that email, a password reset link is on its way.')
+      return
+    }
     const result = mode === 'sign-in' ? await signIn(email, password) : await signUp(email, password)
     setSubmitting(false)
     if (result.error) {
@@ -68,12 +126,15 @@ export function Account() {
     }
   }
 
+  const heading = mode === 'sign-in' ? 'Sign In' : mode === 'sign-up' ? 'Create an Account' : 'Reset Password'
+
   return (
     <div className="page account-page">
-      <h1>{mode === 'sign-in' ? 'Sign In' : 'Create an Account'}</h1>
+      <h1>{heading}</h1>
       <p className="page-intro">
-        Sign in to sync your progress across devices. Guests can still use the app — progress is
-        saved locally on this device instead.
+        {mode === 'forgot'
+          ? 'Enter your account email and we’ll send you a link to reset your password.'
+          : 'Sign in to sync your progress across devices. Guests can still use the app — progress is saved locally on this device instead.'}
       </p>
 
       <form className="auth-form" onSubmit={(e) => void handleSubmit(e)}>
@@ -87,25 +148,47 @@ export function Account() {
             autoComplete="email"
           />
         </label>
-        <label>
-          Password
-          <input
-            type="password"
-            required
-            minLength={6}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            autoComplete={mode === 'sign-in' ? 'current-password' : 'new-password'}
-          />
-        </label>
+        {mode !== 'forgot' && (
+          <label>
+            Password
+            <input
+              type="password"
+              required
+              minLength={6}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              autoComplete={mode === 'sign-in' ? 'current-password' : 'new-password'}
+            />
+          </label>
+        )}
 
         {error && <p className="auth-error">{error}</p>}
         {info && <p className="auth-info">{info}</p>}
 
         <button type="submit" className="btn btn-primary" disabled={submitting}>
-          {submitting ? 'Please wait...' : mode === 'sign-in' ? 'Sign In' : 'Sign Up'}
+          {submitting
+            ? 'Please wait...'
+            : mode === 'sign-in'
+              ? 'Sign In'
+              : mode === 'sign-up'
+                ? 'Sign Up'
+                : 'Send reset link'}
         </button>
       </form>
+
+      {mode === 'sign-in' && (
+        <button
+          type="button"
+          className="link-btn"
+          onClick={() => {
+            setMode('forgot')
+            setError(null)
+            setInfo(null)
+          }}
+        >
+          Forgot your password?
+        </button>
+      )}
 
       <button
         type="button"
