@@ -22,6 +22,19 @@ npm run build    # type-check and build for production
 npm run lint     # run oxlint
 ```
 
+## Deployment
+
+The app is a client-rendered SPA deployed to **Cloudflare Workers static assets** (config in
+[`wrangler.jsonc`](./wrangler.jsonc)) and served from the custom domain `aceacademy.com`. It
+uses `BrowserRouter` at the root path; Cloudflare's `not_found_handling: single-page-application`
+serves `index.html` for unmatched paths so deep links and refreshes work.
+
+CI (`.github/workflows/deploy.yml`) runs the full test suite, builds, then deploys with
+`wrangler` on every push. It needs two repo secrets in addition to the Supabase ones:
+`CLOUDFLARE_API_TOKEN` (scoped to *Workers Scripts: Edit*) and `CLOUDFLARE_ACCOUNT_ID`.
+
+To deploy manually: `npm run build && npm run deploy`.
+
 ## Backend setup (Supabase)
 
 Accounts and cloud progress sync are optional — without them, the app just uses `localStorage` as before. To enable them:

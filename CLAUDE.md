@@ -2,7 +2,8 @@
 
 A React 19 + TypeScript + Vite tennis learning app. Static curriculum content,
 local-first progress, optional Supabase accounts for cross-device sync.
-Deployed to GitHub Pages under the base path `/ace-academy/`.
+Deployed to Cloudflare Workers static assets at the root path `/`, served from the
+custom domain `aceacademy.com`.
 
 ## Development is test-driven
 
@@ -62,7 +63,9 @@ build served by `vite preview`.
 - Seed state with `seedProgress()` and assert persisted state with `readStoredProgress()`.
 - In e2e, `locator.count()` does **not** auto-wait. Always `await expect(locator.first())
   .toBeVisible()` before counting, or you will get flaky zero-counts.
-- The app uses `HashRouter`, so e2e navigation is `page.goto('#/drills')`, not `/drills`.
+- The app uses `BrowserRouter`, so e2e navigation is `page.goto('/drills')`. Deep links work
+  because Cloudflare's `not_found_handling: single-page-application` (see `wrangler.jsonc`)
+  serves `index.html` with a 200 for unmatched paths; `vite preview` does the same locally.
 
 ### Supabase in tests
 

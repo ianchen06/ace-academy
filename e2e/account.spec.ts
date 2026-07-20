@@ -1,7 +1,7 @@
 import { expect, test, TEST_EMAIL, TEST_PASSWORD, USER_ID } from './fixtures'
 
 async function signIn(page: import('@playwright/test').Page) {
-  await page.goto('#/account')
+  await page.goto('/account')
   await page.getByLabel('Email').fill(TEST_EMAIL)
   await page.getByLabel('Password').fill(TEST_PASSWORD)
   await page.getByRole('button', { name: 'Sign In', exact: true }).click()
@@ -19,7 +19,7 @@ test.describe('accounts', () => {
 
   test('bad credentials show an error and keep the form', async ({ page, supabase }) => {
     void supabase
-    await page.goto('#/account')
+    await page.goto('/account')
     await page.getByLabel('Email').fill(TEST_EMAIL)
     await page.getByLabel('Password').fill('wrong-password')
     await page.getByRole('button', { name: 'Sign In', exact: true }).click()
@@ -30,7 +30,7 @@ test.describe('accounts', () => {
 
   test('signing up asks the user to confirm their email', async ({ page, supabase }) => {
     void supabase
-    await page.goto('#/account')
+    await page.goto('/account')
     await page.getByRole('button', { name: /Don't have an account/ }).click()
     await page.getByLabel('Email').fill('new@example.com')
     await page.getByLabel('Password').fill(TEST_PASSWORD)
@@ -64,7 +64,7 @@ test.describe('cross-device progress sync', () => {
     supabase.seedRow(USER_ID, { completed_lessons: ['b-grip'] })
 
     await signIn(page)
-    await page.goto('#/curriculum/beginner')
+    await page.goto('/curriculum/beginner')
     await expect(page.locator('.check-dot.done')).toHaveCount(1)
   })
 
@@ -72,12 +72,12 @@ test.describe('cross-device progress sync', () => {
     supabase.seedRow('someone-else', { completed_lessons: ['b-grip'] })
 
     await signIn(page)
-    await page.goto('#/curriculum/beginner')
+    await page.goto('/curriculum/beginner')
     await expect(page.locator('.check-dot.done')).toHaveCount(0)
   })
 
   test('local guest progress is merged up, not discarded', async ({ page, supabase }) => {
-    await page.goto('#/curriculum/beginner')
+    await page.goto('/curriculum/beginner')
     await page.locator('.lesson-list-item').first().click()
     await page.getByRole('button', { name: 'Mark as complete' }).click()
 
@@ -97,7 +97,7 @@ test.describe('cross-device progress sync', () => {
     await signIn(page)
     await expect(page.getByRole('button', { name: 'Sign out' })).toBeVisible()
 
-    await page.goto('#/drills')
+    await page.goto('/drills')
     await page.locator('.drill-card').first().getByRole('button', { name: 'Mark complete' }).click()
 
     await expect.poll(() => supabase.upserts.at(-1)?.completed_drills.length ?? 0).toBeGreaterThan(0)
@@ -110,8 +110,14 @@ test.describe('cross-device progress sync', () => {
     await signIn(page)
     await expect(page.getByRole('button', { name: 'Sign out' })).toBeVisible()
 
-    // Local progress still works even though the sync failed.
-    await page.goto('#/drills')
+    // Local progress still works even though the sync failed. Navigate via the
+    // in-app link (client-side) rather than page.goto, which under BrowserRouter
+    // would be a full reload — that would remount the app and issue a fresh
+    // cloud read, retrying the (now un-failed) select and defeating the point of
+    // this test. Real users navigate by link too; the unsynced session must
+    // persist across an in-app route change.
+    await page.getByRole('link', { name: 'Drills', exact: true }).click()
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Drills')
     const first = page.locator('.drill-card').first()
     await first.getByRole('button', { name: 'Mark complete' }).click()
     await expect(first).toHaveClass(/complete/)

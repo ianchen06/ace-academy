@@ -1,0 +1,14 @@
+{
+  // Cloudflare Workers static-asset deploy for the SPA. No Worker script is
+  // needed for a pure client-rendered app — `assets` serves the Vite build,
+  // and `not_found_handling: single-page-application` serves index.html with a
+  // 200 for any unmatched path, so BrowserRouter deep links and refreshes work.
+  // A `main` entry can be added later to introduce SSR or an API.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "ace-academy",
+  "compatibility_date": "2026-07-01",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "single-page-application"
+  }
+}
