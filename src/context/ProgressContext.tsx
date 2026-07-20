@@ -67,12 +67,19 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
   const pushToCloud = useCallback(
     (next: ProgressState, userId: string) => {
       if (!supabase) return
-      void supabase.from('progress').upsert({
-        user_id: userId,
-        completed_lessons: next.completedLessons,
-        completed_drills: next.completedDrills,
-        quiz_attempts: next.quizAttempts,
-      })
+      // A PostgrestBuilder is lazy — it only issues its request once awaited or
+      // `.then()`-ed. Dropping the result here would silently send nothing.
+      void supabase
+        .from('progress')
+        .upsert({
+          user_id: userId,
+          completed_lessons: next.completedLessons,
+          completed_drills: next.completedDrills,
+          quiz_attempts: next.quizAttempts,
+        })
+        .then(({ error }) => {
+          if (error) console.error('Failed to save cloud progress', error)
+        })
     },
     [],
   )
@@ -93,8 +100,10 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
 
       if (cancelled) return
       if (error) {
+        // Deliberately leave this user unsynced. Marking them synced here would
+        // let the next local edit upsert local-only state over a cloud row we
+        // never managed to read, destroying progress from another device.
         console.error('Failed to load cloud progress', error)
-        syncedUserIdRef.current = user.id
         return
       }
 
