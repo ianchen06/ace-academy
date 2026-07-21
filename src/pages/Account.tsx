@@ -80,8 +80,11 @@ export function Account() {
     <div className="page account-page">
       <h1>{mode === 'sign-in' ? 'Sign In' : mode === 'sign-up' ? 'Create an Account' : 'Reset your password'}</h1>
       <p className="page-intro">
-        Sign in to sync your progress across devices. Guests can still use the app — progress is
-        saved locally on this device instead.
+        {mode === 'forgot'
+          ? "Enter your email and we'll send you a link to reset your password."
+          : mode === 'sign-up'
+            ? 'Create a free account to sync your progress across devices. Guests can still use the app — progress is saved locally on this device instead.'
+            : 'Sign in to sync your progress across devices. Guests can still use the app — progress is saved locally on this device instead.'}
       </p>
 
       <form className="auth-form" onSubmit={(e) => void handleSubmit(e)}>
@@ -123,35 +126,37 @@ export function Account() {
         </button>
       </form>
 
-      {mode === 'sign-in' && (
+      <div className="auth-links">
+        {mode === 'sign-in' && (
+          <button
+            type="button"
+            className="link-btn"
+            onClick={() => {
+              setMode('forgot')
+              setError(null)
+              setInfo(null)
+            }}
+          >
+            Forgot password?
+          </button>
+        )}
+
         <button
           type="button"
           className="link-btn"
           onClick={() => {
-            setMode('forgot')
+            setMode(mode === 'sign-in' ? 'sign-up' : 'sign-in')
             setError(null)
             setInfo(null)
           }}
         >
-          Forgot password?
+          {mode === 'sign-in'
+            ? "Don't have an account? Sign up"
+            : mode === 'sign-up'
+              ? 'Already have an account? Sign in'
+              : 'Back to sign in'}
         </button>
-      )}
-
-      <button
-        type="button"
-        className="link-btn"
-        onClick={() => {
-          setMode(mode === 'sign-in' ? 'sign-up' : 'sign-in')
-          setError(null)
-          setInfo(null)
-        }}
-      >
-        {mode === 'sign-in'
-          ? "Don't have an account? Sign up"
-          : mode === 'sign-up'
-            ? 'Already have an account? Sign in'
-            : 'Back to sign in'}
-      </button>
+      </div>
     </div>
   )
 }

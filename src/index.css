@@ -956,6 +956,13 @@ li {
   margin: 0;
 }
 
+.auth-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
 .link-btn {
   background: none;
   border: none;
@@ -964,6 +971,7 @@ li {
   font-size: 0.85rem;
   cursor: pointer;
   padding: 0;
+  text-align: left;
 }
 
 .link-btn:hover {

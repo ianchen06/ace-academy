@@ -17,6 +17,22 @@ test.describe('accounts', () => {
     await expect(page.locator('.nav-links').getByRole('link', { name: TEST_EMAIL })).toBeVisible()
   })
 
+  test('the sign-in footer links are separated, not run together on one line', async ({ page, supabase }) => {
+    void supabase
+    await page.goto('/account')
+
+    const forgot = page.getByRole('button', { name: /Forgot password/i })
+    const signUp = page.getByRole('button', { name: /Don't have an account/ })
+    await expect(forgot).toBeVisible()
+    await expect(signUp).toBeVisible()
+
+    const a = (await forgot.boundingBox())!
+    const b = (await signUp.boundingBox())!
+    // The two links must be stacked, not butted together on the same baseline
+    // reading as "Forgot password?Don't have an account? Sign up".
+    expect(b.y).toBeGreaterThanOrEqual(a.y + a.height)
+  })
+
   test('bad credentials show an error and keep the form', async ({ page, supabase }) => {
     void supabase
     await page.goto('/account')
