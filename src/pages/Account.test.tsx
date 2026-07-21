@@ -83,6 +83,15 @@ describe('Account — signed out', () => {
     expect(screen.getByRole('heading', { name: 'Create an Account' })).toBeInTheDocument()
   })
 
+  it('shows sign-up-specific intro copy in sign-up mode', async () => {
+    configure({ session: null })
+    const { user } = renderAccount()
+    await user.click(await screen.findByRole('button', { name: /Don't have an account/ }))
+
+    expect(screen.getByText(/Create a free account to sync your progress/i)).toBeInTheDocument()
+    expect(screen.queryByText(/Sign in to sync your progress/i)).not.toBeInTheDocument()
+  })
+
   it('switches back to sign-in mode', async () => {
     configure({ session: null })
     const { user } = renderAccount()
@@ -166,6 +175,15 @@ describe('Account — forgot password', () => {
     expect(screen.getByRole('heading', { name: /Reset your password/i })).toBeInTheDocument()
     expect(screen.getByLabelText('Email')).toBeInTheDocument()
     expect(screen.queryByLabelText('Password')).not.toBeInTheDocument()
+  })
+
+  it('shows reset-specific intro copy instead of the sign-in copy', async () => {
+    configure({ session: null })
+    const { user } = renderAccount()
+    await user.click(await screen.findByRole('button', { name: /Forgot password/i }))
+
+    expect(screen.getByText(/send you a link to reset your password/i)).toBeInTheDocument()
+    expect(screen.queryByText(/Sign in to sync your progress/i)).not.toBeInTheDocument()
   })
 
   it('sends a reset link and shows a neutral confirmation that does not disclose the account', async () => {
