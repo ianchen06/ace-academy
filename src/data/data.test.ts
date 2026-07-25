@@ -287,3 +287,35 @@ describe('step-by-step forehand guides', () => {
     }
   })
 })
+
+// Pro-style lessons show how the same grip fundamentals play out in a
+// recognisable real-world technique, so each one must actually name the
+// player and the grip it is describing, not just gesture at "pro tennis".
+describe('pro-style forehand technique lessons', () => {
+  const federer = lessons.find((l) => l.id === 'i-forehand-eastern-federer')
+  const nadal = lessons.find((l) => l.id === 'i-forehand-semi-western-nadal')
+
+  it('has a lesson on the Federer-style Eastern forehand', () => {
+    expect(federer).toBeDefined()
+    const text = (federer?.content ?? []).join(' ')
+    expect(text).toContain('Federer')
+    expect(text).toContain('Eastern')
+  })
+
+  it('has a lesson on the Nadal-style Semi-Western forehand', () => {
+    expect(nadal).toBeDefined()
+    const text = (nadal?.content ?? []).join(' ')
+    expect(text).toContain('Nadal')
+    expect(text).toContain('Semi-Western')
+  })
+
+  it('links each pro-style lesson to a practice drill from its own level', () => {
+    const drillLevel = new Map(drills.map((d) => [d.id, d.levelId]))
+    for (const lesson of [federer, nadal]) {
+      expect(lesson?.drillIds?.length ?? 0, `lesson ${lesson?.id} drills`).toBeGreaterThan(0)
+      for (const drillId of lesson?.drillIds ?? []) {
+        expect(drillLevel.get(drillId), `lesson ${lesson?.id} -> drill ${drillId}`).toBe(lesson?.levelId)
+      }
+    }
+  })
+})
