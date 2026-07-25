@@ -2,10 +2,8 @@
 skill: Mental Game
 title: Simulated Pressure Points
 duration: 15 minutes
-equipment: 'Racquet, balls, a partner, a scoreboard (or count aloud)'
-goal: >-
-  Practice your between-point routine and decision-making under simulated
-  pressure.
+equipment: Racquet, balls, a partner, a scoreboard (or count aloud)
+goal: Practice your between-point routine and decision-making under simulated pressure.
 ---
 
 1. Play tiebreak-style points starting the score at 5-5 (or another close score) each time.

@@ -2,7 +2,7 @@
 skill: Tactics
 title: Three-Ball Pattern Play
 duration: 20 minutes
-equipment: 'Racquet, balls, a partner'
+equipment: Racquet, balls, a partner
 goal: Train serve/rally patterns rather than improvised points.
 ---
 

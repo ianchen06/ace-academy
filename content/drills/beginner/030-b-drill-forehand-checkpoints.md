@@ -2,7 +2,7 @@
 skill: Forehand
 title: Drop-Feed Forehand Checkpoints
 duration: 15 minutes
-equipment: 'Racquet, a basket of balls'
+equipment: Racquet, a basket of balls
 goal: Build the Eastern forehand one checkpoint at a time from a self-fed ball.
 ---
 

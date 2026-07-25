@@ -2,7 +2,7 @@
 skill: Forehand
 title: Topspin Target Rally
 duration: 15 minutes
-equipment: 'Racquet, balls, cones or targets, a partner or feeder'
+equipment: Racquet, balls, cones or targets, a partner or feeder
 goal: Add controlled topspin while hitting to a target.
 ---
 

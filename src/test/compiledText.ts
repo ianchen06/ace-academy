@@ -13,9 +13,22 @@ function parse(html: string | undefined): HTMLDivElement {
   return host
 }
 
+/**
+ * Collapses runs of whitespace the way a browser lays them out, so these
+ * helpers report the words on screen rather than the shape of the source.
+ * Content is authored with semantic line breaks — one sentence per line, so a
+ * typo fix is a one-line diff — and markdown-it carries those breaks into the
+ * `<p>` as newlines. Handing back the raw `textContent` would make every
+ * `getByText(paragraph)` assertion fail against prose the reader sees as
+ * perfectly ordinary single-spaced sentences.
+ */
+function asRead(text: string | null): string {
+  return (text ?? '').replace(/\s+/g, ' ').trim()
+}
+
 /** The text of every element matching `selector`, in document order. */
 export function renderedElements(html: string | undefined, selector: string): string[] {
-  return [...parse(html).querySelectorAll(selector)].map((el) => el.textContent ?? '')
+  return [...parse(html).querySelectorAll(selector)].map((el) => asRead(el.textContent))
 }
 
 /** Every prose block — paragraphs and list items alike — as plain text. */
@@ -35,5 +48,5 @@ export function renderedParagraphs(html: string | undefined): string[] {
 
 /** The whole body as one searchable string. */
 export function renderedText(html: string | undefined): string {
-  return parse(html).textContent ?? ''
+  return asRead(parse(html).textContent)
 }

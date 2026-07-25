@@ -2,7 +2,7 @@
 skill: Footwork
 title: Spider Run
 duration: 10 minutes
-equipment: '5 balls or cones, a stopwatch'
+equipment: 5 balls or cones, a stopwatch
 goal: Build repeatable multi-directional movement and measure it over time.
 ---
 

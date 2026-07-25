@@ -3,12 +3,8 @@ category: Serve
 title: Serve Power & the Kinetic Chain
 summary: Generating racquet head speed efficiently through the whole body.
 tips:
-  - >-
-    Video your serve from the side to check you are loading and driving up
-    through your legs, not "arming" the ball.
-  - >-
-    Train the trophy position in slow motion until it is a stable checkpoint you
-    hit every time.
+  - Video your serve from the side to check you are loading and driving up through your legs, not "arming" the ball.
+  - Train the trophy position in slow motion until it is a stable checkpoint you hit every time.
 drills:
   - a-drill-serve-video
   - a-drill-leg-drive

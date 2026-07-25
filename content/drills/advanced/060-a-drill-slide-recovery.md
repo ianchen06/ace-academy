@@ -2,7 +2,7 @@
 skill: Footwork
 title: Wide-Ball Slide and Recover
 duration: 20 minutes
-equipment: 'Racquet, balls, a feeder (clay court ideal, hard court with controlled steps)'
+equipment: Racquet, balls, a feeder (clay court ideal, hard court with controlled steps)
 goal: Turn a defensive wide ball into a balanced recovery instead of a scramble.
 ---
 

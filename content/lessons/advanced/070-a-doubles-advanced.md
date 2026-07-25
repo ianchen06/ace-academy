@@ -1,14 +1,10 @@
 ---
 category: Doubles
 title: Advanced Doubles Tactics
-summary: 'Poaching, signals, and the Australian formation.'
+summary: Poaching, signals, and the Australian formation.
 tips:
-  - >-
-    Mix in genuine poaches and fake poaches roughly equally so returners cannot
-    simply "avoid the net player."
-  - >-
-    Switch to Australian formation specifically against returners who love to
-    rip crosscourt returns at your net partner.
+  - Mix in genuine poaches and fake poaches roughly equally so returners cannot simply "avoid the net player."
+  - Switch to Australian formation specifically against returners who love to rip crosscourt returns at your net partner.
 drills:
   - a-drill-australian
 ---

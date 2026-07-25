@@ -19,13 +19,9 @@ questions:
       - To signal your partner in doubles
       - To save energy during long rallies
     answer: To land balanced and ready to push off explosively as your opponent hits
-    explanation: >-
-      The split step times a light hop to land as your opponent contacts the ball, letting you react
-      and push off quickly in any direction.
+    explanation: The split step times a light hop to land as your opponent contacts the ball, letting you react and push off quickly in any direction.
   - id: q3
-    question: >-
-      On a basic topspin forehand, what direction should the racquet generally travel through
-      contact?
+    question: On a basic topspin forehand, what direction should the racquet generally travel through contact?
     options:
       - High to low
       - Low to high
@@ -41,9 +37,7 @@ questions:
       - Relaxed, moderate pressure — like holding a small bird
       - It doesn't matter as long as you don't drop the racquet
     answer: Relaxed, moderate pressure — like holding a small bird
-    explanation: >-
-      A relaxed, moderate grip allows for racquet head speed and feel; an overly tight grip creates
-      tension that reduces power and touch.
+    explanation: A relaxed, moderate grip allows for racquet head speed and feel; an overly tight grip creates tension that reduces power and touch.
   - id: q5
     question: What is the main advantage of a two-handed backhand for beginners?
     options:
@@ -52,6 +46,4 @@ questions:
       - It requires a different grip for every shot
       - It is only usable on clay courts
     answer: It is generally easier to control while learning
-    explanation: >-
-      The two-handed backhand offers more stability and control for beginners, which is why many
-      players start with it.
+    explanation: The two-handed backhand offers more stability and control for beginners, which is why many players start with it.

@@ -6,17 +6,11 @@ questions:
     question: What is the classic pattern of "crosscourt then down the line" designed to exploit?
     options:
       - The server's second serve
-      - >-
-        An opponent stretched wide by repeated crosscourt shots, opening the court for a
-        down-the-line winner
+      - An opponent stretched wide by repeated crosscourt shots, opening the court for a down-the-line winner
       - The net player in doubles
       - A short ball only
-    answer: >-
-      An opponent stretched wide by repeated crosscourt shots, opening the court for a down-the-line
-      winner
-    explanation: >-
-      Repeated crosscourt shots pull an opponent out of position; once stretched wide, a
-      down-the-line shot exploits the open court.
+    answer: An opponent stretched wide by repeated crosscourt shots, opening the court for a down-the-line winner
+    explanation: Repeated crosscourt shots pull an opponent out of position; once stretched wide, a down-the-line shot exploits the open court.
   - id: q2
     question: What does the "Australian" (I) formation in doubles primarily take away from the returner?
     options:
@@ -25,39 +19,25 @@ questions:
       - The serve itself
       - Their ability to see the server
     answer: Their favorite crosscourt return, forcing them down the line instead
-    explanation: >-
-      In Australian formation, both serving players start on the same side, blocking the returner's
-      usual crosscourt return.
+    explanation: In Australian formation, both serving players start on the same side, blocking the returner's usual crosscourt return.
   - id: q3
-    question: >-
-      What is the main benefit of the kinetic chain (legs → hips → shoulders → arm) in an advanced
-      serve?
+    question: What is the main benefit of the kinetic chain (legs → hips → shoulders → arm) in an advanced serve?
     options:
       - It slows the racquet down for better control
       - It generates racquet head speed efficiently by sequencing body segments
       - It is only relevant for the second serve
       - It eliminates the need for a toss
     answer: It generates racquet head speed efficiently by sequencing body segments
-    explanation: >-
-      Sequencing the kinetic chain lets each body segment add speed to the next, producing more
-      racquet head speed with less strain than arming the ball.
+    explanation: Sequencing the kinetic chain lets each body segment add speed to the next, producing more racquet head speed with less strain than arming the ball.
   - id: q4
-    question: >-
-      When approaching the net, why is a down-the-line approach shot often preferred over
-      crosscourt?
+    question: When approaching the net, why is a down-the-line approach shot often preferred over crosscourt?
     options:
       - It is always a bigger winner
-      - >-
-        It takes the angle away from the opponent and shortens the distance you need to cover to the
-        net
+      - It takes the angle away from the opponent and shortens the distance you need to cover to the net
       - It requires less racquet head speed
       - Down-the-line shots are never used at advanced levels
-    answer: >-
-      It takes the angle away from the opponent and shortens the distance you need to cover to the
-      net
-    explanation: >-
-      A down-the-line approach limits the opponent's angle options and keeps the approaching
-      player's path to the net shorter.
+    answer: It takes the angle away from the opponent and shortens the distance you need to cover to the net
+    explanation: A down-the-line approach limits the opponent's angle options and keeps the approaching player's path to the net shorter.
   - id: q5
     question: What is a recommended between-point routine used to manage pressure in a match?
     options:
@@ -66,9 +46,7 @@ questions:
       - A brief physical reset followed by a clear tactical intention for the next point
       - Avoiding eye contact with the scoreboard entirely
     answer: A brief physical reset followed by a clear tactical intention for the next point
-    explanation: >-
-      A consistent short routine — a physical reset plus a tactical intention — helps players let go
-      of the last point and refocus.
+    explanation: A consistent short routine — a physical reset plus a tactical intention — helps players let go of the last point and refocus.
   - id: q6
     question: Against a fast serve, what adjustment should an advanced returner make?
     options:
@@ -77,6 +55,4 @@ questions:
       - Stand as far forward as possible on every return
       - Close your eyes and swing through the contact zone
     answer: Shorten the backswing into a compact block/redirect motion
-    explanation: >-
-      A compact, shortened backswing is more reliable against pace, using the server's own speed
-      rather than trying to out-swing it.
+    explanation: A compact, shortened backswing is more reliable against pace, using the server's own speed rather than trying to out-swing it.

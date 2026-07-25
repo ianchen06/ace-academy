@@ -4,7 +4,7 @@ title: Recovery Footwork & Court Positioning
 summary: Getting to the ball efficiently and recovering to a strong position after.
 tips:
   - Never watch your own shot — start recovering the instant you make contact.
-  - 'Split step every single time your opponent is about to hit, no exceptions.'
+  - Split step every single time your opponent is about to hit, no exceptions.
 drills:
   - i-drill-figure-8
   - i-drill-recovery

@@ -2,10 +2,8 @@
 skill: Forehand
 title: Western Grip Heavy-Ball Sets
 duration: 20 minutes
-equipment: 'Racquet, balls, a ball machine or strong feeder'
-goal: >-
-  Produce a heavy, high-bouncing forehand from an extreme grip without losing
-  depth.
+equipment: Racquet, balls, a ball machine or strong feeder
+goal: Produce a heavy, high-bouncing forehand from an extreme grip without losing depth.
 ---
 
 1. Set the Western grip (base knuckle on bevel 5) and hit 10 forehands off shoulder-high feeds, contacting the ball well in front and above waist height.

@@ -1,20 +1,17 @@
 ---
 category: Serve
 title: Serve Placement & the Kick Serve
-summary: 'Hitting corners on purpose, and adding a safe, high-bouncing second serve.'
+summary: Hitting corners on purpose, and adding a safe, high-bouncing second serve.
 tips:
-  - >-
-    Practice serving to specific targets (cones in the box) rather than just
-    "getting it in."
-  - >-
-    Develop the kick serve first as your second serve — it has the largest
-    margin for error over the highest part of the net.
+  - Practice serving to specific targets (cones in the box) rather than just "getting it in."
+  - Develop the kick serve first as your second serve — it has the largest margin for error over the highest part of the net.
 drills:
   - i-drill-serve-targets
   - i-drill-kick-serve
 ---
 
-Rather than serving as hard as possible down the middle, aim for three targets: wide (pulling the returner off the court), body (jamming them), and down the T (fast, low angle). Mixing targets keeps returners guessing.
+Rather than serving as hard as possible down the middle, aim for three targets: wide (pulling the returner off the court), body (jamming them), and down the T (fast, low angle).
+Mixing targets keeps returners guessing.
 
 The toss location changes the serve type: toss slightly to your right (for a right-hander) and in front for a flat/slat serve, more to the left and behind your head for a kick serve.
 

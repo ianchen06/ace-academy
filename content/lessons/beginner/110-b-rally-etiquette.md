@@ -3,12 +3,8 @@ category: Fundamentals
 title: Rally Basics & On-Court Etiquette
 summary: How to keep a friendly rally going and play courteously.
 tips:
-  - >-
-    If you are unsure whether a ball was in or out, it is a mistake in your
-    favor — call it in.
-  - >-
-    Retrieve and return balls between points, not while a point is still being
-    played on a neighboring court.
+  - If you are unsure whether a ball was in or out, it is a mistake in your favor — call it in.
+  - Retrieve and return balls between points, not while a point is still being played on a neighboring court.
 ---
 
 When rallying (not keeping score), the goal is cooperation: hit the ball back to your partner at a comfortable pace and height so both of you can keep the ball in play.

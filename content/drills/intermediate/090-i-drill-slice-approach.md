@@ -2,7 +2,7 @@
 skill: Backhand
 title: Slice & Advance
 duration: 15 minutes
-equipment: 'Racquet, balls, a partner or feeder'
+equipment: Racquet, balls, a partner or feeder
 goal: Combine a slice backhand with forward movement to the net.
 ---
 

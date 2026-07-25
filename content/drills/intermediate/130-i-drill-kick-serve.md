@@ -2,7 +2,7 @@
 skill: Serve
 title: Kick Serve Toss & Brush
 duration: 15 minutes
-equipment: 'Racquet, balls'
+equipment: Racquet, balls
 goal: Groove the toss position and racquet path for a kick serve.
 ---
 

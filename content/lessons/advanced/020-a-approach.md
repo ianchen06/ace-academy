@@ -3,12 +3,8 @@ category: Net Play
 title: Approach Shots & Transition Game
 summary: Recognizing when and how to move forward to finish points at net.
 tips:
-  - >-
-    Approach off short balls inside the service line — attacking from behind the
-    baseline is low-percentage.
-  - >-
-    Aim your split step to land just after your opponent commits to their
-    passing shot direction.
+  - Approach off short balls inside the service line — attacking from behind the baseline is low-percentage.
+  - Aim your split step to land just after your opponent commits to their passing shot direction.
 drills:
   - a-drill-approach-sequence
 ---

@@ -115,6 +115,19 @@ describe('compileLesson', () => {
       expect(html).toContain('<strong>bold</strong>')
     })
 
+    // Content is authored with semantic line breaks: one sentence per source
+    // line, so a typo fix diffs as one line rather than a rewritten paragraph.
+    // That only works while a single newline stays a soft break — turning on
+    // markdown-it's `breaks` option would put a <br> after every sentence in
+    // the curriculum and reflow every lesson on the site.
+    it('joins semantic line breaks into one paragraph rather than breaking the line', () => {
+      const body = 'One sentence.\nA second sentence.\n\nA new paragraph.'
+      const { html } = compileLesson(source(VALID, body), PATH)
+      expect(html).not.toContain('<br>')
+      expect(html).toContain('<p>One sentence.\nA second sentence.</p>')
+      expect(html).toContain('<p>A new paragraph.</p>')
+    })
+
     it('escapes raw html in the source rather than passing it through', () => {
       const { html } = compileLesson(source(VALID, 'Beware <script>alert(1)</script>'), PATH)
       expect(html).not.toContain('<script>')

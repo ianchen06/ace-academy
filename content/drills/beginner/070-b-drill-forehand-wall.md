@@ -2,7 +2,7 @@
 skill: Forehand
 title: Wall Rally
 duration: 10 minutes
-equipment: 'Racquet, balls, a practice wall'
+equipment: Racquet, balls, a practice wall
 goal: Groove a consistent forehand swing path with constant repetition.
 ---
 

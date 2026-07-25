@@ -2,7 +2,7 @@
 skill: Doubles
 title: Poach & Communicate
 duration: 15 minutes
-equipment: 'Racquet, balls, 3 other players'
+equipment: Racquet, balls, 3 other players
 goal: Practice net poaching and verbal communication in doubles.
 ---
 

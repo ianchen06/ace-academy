@@ -2,7 +2,7 @@
 skill: Serve
 title: Leg Drive Isolation
 duration: 10 minutes
-equipment: 'Racquet, balls'
+equipment: Racquet, balls
 goal: Feel and exaggerate the upward leg drive into the serve.
 ---
 

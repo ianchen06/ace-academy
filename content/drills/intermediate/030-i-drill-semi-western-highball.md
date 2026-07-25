@@ -2,10 +2,8 @@
 skill: Forehand
 title: Semi-Western High-Ball Windshield Wipers
 duration: 15 minutes
-equipment: 'Racquet, balls, a feeder or ball machine'
-goal: >-
-  Groove the steep low-to-high path and across-the-body finish of the
-  Semi-Western forehand.
+equipment: Racquet, balls, a feeder or ball machine
+goal: Groove the steep low-to-high path and across-the-body finish of the Semi-Western forehand.
 ---
 
 1. Have the feeder loop balls that bounce between shoulder and head height.
