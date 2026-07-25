@@ -2,10 +2,8 @@
 skill: Forehand
 title: 'Take It Early: Rise-Ball Drill'
 duration: 15 minutes
-equipment: 'Racquet, balls, a feeder or ball machine'
-goal: >-
-  Build the compact, straight-arm Eastern forehand that lets you take the ball
-  early, on the rise.
+equipment: Racquet, balls, a feeder or ball machine
+goal: Build the compact, straight-arm Eastern forehand that lets you take the ball early, on the rise.
 ---
 
 1. Stand a step inside the baseline with an Eastern grip, and have the feeder hit with enough pace that the ball arrives just after the bounce, not after it has floated up.

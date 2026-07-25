@@ -2,7 +2,7 @@
 skill: Net Play
 title: Reflex Volley Exchange
 duration: 10 minutes
-equipment: 'Racquet, balls, a partner'
+equipment: Racquet, balls, a partner
 goal: Sharpen hands and reaction time at net.
 ---
 

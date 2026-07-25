@@ -2,7 +2,7 @@
 skill: Footwork
 title: Last-Three-Steps Tuning
 duration: 10 minutes
-equipment: 'Racquet, balls, a partner or feeder'
+equipment: Racquet, balls, a partner or feeder
 goal: Replace one big lunge with several small adjustment steps before contact.
 ---
 

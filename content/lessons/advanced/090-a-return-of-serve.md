@@ -3,12 +3,8 @@ category: Strokes
 title: Advanced Return of Serve
 summary: Neutralizing big serves and turning defense into offense.
 tips:
-  - >-
-    Anticipate serve direction by reading toss position and body cues, then
-    commit early to your movement.
-  - >-
-    Against a big serve, prioritize simply getting a deep, controlled ball back
-    in play over hitting a winner.
+  - Anticipate serve direction by reading toss position and body cues, then commit early to your movement.
+  - Against a big serve, prioritize simply getting a deep, controlled ball back in play over hitting a winner.
 drills:
   - a-drill-return-reaction
 ---

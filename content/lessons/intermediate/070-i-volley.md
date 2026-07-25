@@ -1,14 +1,10 @@
 ---
 category: Net Play
 title: The Volley
-summary: 'Ending points at the net with a short, punching motion.'
+summary: Ending points at the net with a short, punching motion.
 tips:
-  - >-
-    Keep the racquet head above your wrist at contact, especially on low
-    volleys.
-  - >-
-    "Watch it onto the strings" applies at the net too — many volley errors come
-    from looking up too soon.
+  - Keep the racquet head above your wrist at contact, especially on low volleys.
+  - '"Watch it onto the strings" applies at the net too — many volley errors come from looking up too soon.'
 drills:
   - i-drill-volley-reflex
   - i-drill-approach-volley

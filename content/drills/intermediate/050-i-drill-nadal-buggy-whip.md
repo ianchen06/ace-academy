@@ -2,10 +2,8 @@
 skill: Forehand
 title: Buggy-Whip Crosscourt Loops
 duration: 15 minutes
-equipment: 'Racquet, balls, a feeder or ball machine'
-goal: >-
-  Groove the high, open-stance, lasso finish that generates heavy topspin on
-  running crosscourt forehands.
+equipment: Racquet, balls, a feeder or ball machine
+goal: Groove the high, open-stance, lasso finish that generates heavy topspin on running crosscourt forehands.
 ---
 
 1. Set a Semi-Western grip and have the feeder loop balls that bounce between shoulder and head height into your forehand corner.

@@ -2,10 +2,8 @@
 skill: Forehand
 title: Grip Adaptation Gauntlet
 duration: 20 minutes
-equipment: 'Racquet, balls, a feeder who can vary height and depth'
-goal: >-
-  Adapt grip and contact height on the fly instead of forcing one pattern on
-  every ball.
+equipment: Racquet, balls, a feeder who can vary height and depth
+goal: Adapt grip and contact height on the fly instead of forcing one pattern on every ball.
 ---
 
 1. The feeder mixes four ball types at random: heavy topspin above the shoulder, low skidding slice, short low ball, and a flat drive at hip height.

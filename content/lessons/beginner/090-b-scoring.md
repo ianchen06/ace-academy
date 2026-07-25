@@ -1,14 +1,10 @@
 ---
 category: Rules & Scoring
 title: How Tennis Scoring Works
-summary: 'Points, games, sets, and the quirky love/15/30/40 system.'
+summary: Points, games, sets, and the quirky love/15/30/40 system.
 tips:
-  - >-
-    Server calls the score before each point, server's score first (e.g.
-    "30-15").
-  - >-
-    In doubles, teams alternate which partner serves each game, and receiving
-    side alternates each point within a game.
+  - Server calls the score before each point, server's score first (e.g. "30-15").
+  - In doubles, teams alternate which partner serves each game, and receiving side alternates each point within a game.
 ---
 
 Tennis scores in four nested layers: points make a game, games make a set, and sets make a match.
@@ -29,7 +25,8 @@ If both players reach 40, it is called "deuce" — a player must then win by two
 
 ## Games and sets
 
-A set is won by the first player to win 6 games, with a margin of at least 2 games (e.g. 6-4). If the set reaches 6-6, most formats play a tiebreak.
+A set is won by the first player to win 6 games, with a margin of at least 2 games (e.g. 6-4).
+If the set reaches 6-6, most formats play a tiebreak.
 
 ## The tiebreak
 

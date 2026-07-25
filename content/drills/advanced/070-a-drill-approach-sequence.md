@@ -2,7 +2,7 @@
 skill: Net Play
 title: Approach-Split-Volley-Overhead
 duration: 20 minutes
-equipment: 'Racquet, balls, a feeder or partner'
+equipment: Racquet, balls, a feeder or partner
 goal: Train the full transition sequence including defending a lob.
 ---
 

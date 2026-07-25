@@ -2,7 +2,7 @@
 skill: Serve
 title: Service Box Accuracy
 duration: 15 minutes
-equipment: 'Racquet, balls'
+equipment: Racquet, balls
 goal: Build a reliable serve motion from a shorter distance.
 ---
 

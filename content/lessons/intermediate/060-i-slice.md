@@ -1,7 +1,7 @@
 ---
 category: Strokes
 title: The Slice Backhand
-summary: 'A low, skidding shot for defense, approach, and variety.'
+summary: A low, skidding shot for defense, approach, and variety.
 tips:
   - Stay down through the shot; standing up early causes the ball to float long.
   - Use slice approach shots to stay low and buy time to get to the net.

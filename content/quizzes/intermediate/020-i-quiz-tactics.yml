@@ -3,18 +3,14 @@ title: Shot Selection & Doubles Basics
 description: Decision-making during rallies and doubles positioning.
 questions:
   - id: q1
-    question: >-
-      What is generally the higher-percentage shot to hit from a defensive position behind the
-      baseline?
+    question: What is generally the higher-percentage shot to hit from a defensive position behind the baseline?
     options:
       - An aggressive winner down the line
       - A high, deep, controlled shot back to the middle or crosscourt
       - A drop shot
       - A hard flat shot aimed at the sideline
     answer: A high, deep, controlled shot back to the middle or crosscourt
-    explanation: >-
-      From defense, a high-margin deep shot (often crosscourt) is safer than attempting a
-      low-percentage winner.
+    explanation: From defense, a high-margin deep shot (often crosscourt) is safer than attempting a low-percentage winner.
   - id: q2
     question: In a standard doubles "up-and-back" formation, what is the net player's primary role?
     options:
@@ -23,9 +19,7 @@ questions:
       - To serve every point
       - To cover the entire baseline alone
     answer: To poach and finish points at the net
-    explanation: >-
-      The net player looks for opportunities to intercept (poach) and put the ball away, while the
-      baseline player builds the point.
+    explanation: The net player looks for opportunities to intercept (poach) and put the ball away, while the baseline player builds the point.
   - id: q3
     question: What should doubles partners do when one of them is pulled wide out of position?
     options:
@@ -43,6 +37,4 @@ questions:
       - Only attempt winners on your weaker side
       - Winners should only be attempted on set point
     answer: Ask if you can make the shot roughly 8 out of 10 times
-    explanation: >-
-      A useful gut check is whether you can execute the shot reliably (e.g. 8/10) rather than
-      gambling on a low-percentage attempt.
+    explanation: A useful gut check is whether you can execute the shot reliably (e.g. 8/10) rather than gambling on a low-percentage attempt.

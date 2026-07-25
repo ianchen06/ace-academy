@@ -2,7 +2,7 @@
 skill: Tactics
 title: Crosscourt Consistency Rally
 duration: 15 minutes
-equipment: 'Racquet, balls, a partner'
+equipment: Racquet, balls, a partner
 goal: Build rally tolerance and shot selection discipline.
 ---
 

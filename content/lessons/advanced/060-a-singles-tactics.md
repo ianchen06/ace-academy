@@ -3,12 +3,8 @@ category: Tactics & Strategy
 title: Singles Patterns & Court Geometry
 summary: Building points with purpose using the geometry of the court.
 tips:
-  - >-
-    Plan the first three shots of a point (serve, +1, +2) as a repeatable
-    pattern rather than improvising each point.
-  - >-
-    Track which side of the court your opponent misses more from and construct
-    points to target it.
+  - Plan the first three shots of a point (serve, +1, +2) as a repeatable pattern rather than improvising each point.
+  - Track which side of the court your opponent misses more from and construct points to target it.
 drills:
   - a-drill-pattern-play
 ---

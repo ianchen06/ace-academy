@@ -3,12 +3,8 @@ category: Doubles
 title: Doubles Positioning Basics
 summary: Working with a partner using up-and-back or two-back formations.
 tips:
-  - >-
-    Move as a unit — where one partner goes, the other adjusts to cover the
-    resulting gap.
-  - >-
-    A confident "yours!" or "mine!" prevents most doubles miscommunication
-    errors.
+  - Move as a unit — where one partner goes, the other adjusts to cover the resulting gap.
+  - A confident "yours!" or "mine!" prevents most doubles miscommunication errors.
 drills:
   - i-drill-doubles-poach
 ---

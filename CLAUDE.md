@@ -153,6 +153,27 @@ questions:                      # required, at least one
 number nobody can proofread, and an off-by-one silently marks correct answers wrong for
 every user who takes the quiz.
 
+### House style: one sentence per line
+
+Prose bodies are authored with **semantic line breaks** — a newline after every sentence,
+no wrapping mid-sentence. Markdown joins them back into one paragraph, so nothing changes
+for the reader, but git diffs by line: a typo fix shows up as a one-line change instead of
+a whole rewritten paragraph, and `git blame` points at the sentence rather than the block.
+Keep a blank line between paragraphs as usual.
+
+This only works while a single newline stays a *soft* break. Turning on markdown-it's
+`breaks` option would put a `<br>` after every sentence in the curriculum — the compiler
+test "joins semantic line breaks into one paragraph" guards that.
+
+Frontmatter and quiz YAML keep **one value per line**. Do not hand-wrap a string across
+lines with `>-`; a folded scalar makes a one-word edit re-flow several lines for no benefit,
+since the value is a single string either way.
+
+Because the compiled HTML now contains those newlines, the helpers in
+`src/test/compiledText.ts` collapse whitespace the way a browser does. Assert against what
+they return, not raw `textContent` — Testing Library normalises the element's text but not
+the string you match it against.
+
 ### Rules the pipeline enforces, and why
 
 - **The filename is the identity.** `010-b-grip.md` means order `010`, id `b-grip`. Ids are

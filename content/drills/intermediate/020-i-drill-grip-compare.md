@@ -2,10 +2,8 @@
 skill: Forehand
 title: Eastern vs Semi-Western Comparison
 duration: 20 minutes
-equipment: 'Racquet, balls, a feeder, chalk or a towel as a contact marker'
-goal: >-
-  Feel how one bevel of grip change moves the contact point and changes the ball
-  flight.
+equipment: Racquet, balls, a feeder, chalk or a towel as a contact marker
+goal: Feel how one bevel of grip change moves the contact point and changes the ball flight.
 ---
 
 1. Hit 15 forehands off waist-high feeds with an Eastern grip, noting where contact feels comfortable relative to your front hip.

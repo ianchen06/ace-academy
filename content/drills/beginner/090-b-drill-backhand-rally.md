@@ -2,7 +2,7 @@
 skill: Backhand
 title: Cooperative Backhand Rally
 duration: 15 minutes
-equipment: 'Racquet, balls, a partner'
+equipment: Racquet, balls, a partner
 goal: Sustain a backhand-to-backhand rally with a partner.
 ---
 

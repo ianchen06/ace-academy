@@ -10,9 +10,7 @@ questions:
       - The contact point, which needs to be further behind you
       - Your ready position only
     answer: The contact point, which needs to be further in front and higher
-    explanation: >-
-      A more closed grip needs contact further forward and higher for the face to arrive square;
-      keeping the old contact point makes every ball feel late.
+    explanation: A more closed grip needs contact further forward and higher for the face to arrive square; keeping the old contact point makes every ball feel late.
   - id: q2
     question: Which grip has the most comfortable strike zone for a ball bouncing above shoulder height?
     options:
@@ -21,37 +19,25 @@ questions:
       - Semi-Western or Western
       - All grips are equally comfortable up there
     answer: Semi-Western or Western
-    explanation: >-
-      The more extreme grips are naturally comfortable at high contact points, which is why they
-      suit high-bouncing surfaces and heavy topspin opponents.
+    explanation: The more extreme grips are naturally comfortable at high contact points, which is why they suit high-bouncing surfaces and heavy topspin opponents.
   - id: q3
     question: Why does a slice ball trouble players with extreme forehand grips?
     options:
       - Slice spins the ball in the opposite direction to topspin, which cannot be returned
-      - >-
-        It arrives low and skidding, which is the hardest ball for an extreme grip, and forces a
-        grip change under time pressure
+      - It arrives low and skidding, which is the hardest ball for an extreme grip, and forces a grip change under time pressure
       - Slice is always hit harder than topspin
       - It bounces higher than a topspin ball
-    answer: >-
-      It arrives low and skidding, which is the hardest ball for an extreme grip, and forces a grip
-      change under time pressure
-    explanation: >-
-      Extreme grips struggle below the knee, so a low skidding slice forces either an awkward lift
-      or a fast grip change — a genuine tactical weakness to exploit.
+    answer: It arrives low and skidding, which is the hardest ball for an extreme grip, and forces a grip change under time pressure
+    explanation: Extreme grips struggle below the knee, so a low skidding slice forces either an awkward lift or a fast grip change — a genuine tactical weakness to exploit.
   - id: q4
-    question: >-
-      Which stance is the workhorse for most modern rally balls hit within a step or two of your
-      position?
+    question: Which stance is the workhorse for most modern rally balls hit within a step or two of your position?
     options:
       - Neutral (closed)
       - Semi-open
       - Fully open
       - Whichever one you are most used to
     answer: Semi-open
-    explanation: >-
-      Semi-open allows full rotation plus some forward weight transfer and recovers quickly, which
-      is why it covers most rally balls.
+    explanation: Semi-open allows full rotation plus some forward weight transfer and recovers quickly, which is why it covers most rally balls.
   - id: q5
     question: On a Semi-Western forehand your balls are floating long. What is the most likely cause?
     options:
@@ -60,9 +46,7 @@ questions:
       - Your grip is one bevel too flat
       - You recovered with the wrong leg
     answer: The racquet head did not drop far enough below the ball, so there is not enough upward brush
-    explanation: >-
-      Topspin comes from the steep upward path a deep racquet drop enables; a shallow drop leaves
-      the ball under-spun and it carries long, whatever the swing speed.
+    explanation: Topspin comes from the steep upward path a deep racquet drop enables; a shallow drop leaves the ball under-spun and it carries long, whatever the swing speed.
   - id: q6
     question: What is the main cost of an extreme forehand grip when you come to the net?
     options:
@@ -71,6 +55,4 @@ questions:
       - It makes the racquet feel heavier
       - There is no cost — grip changes are irrelevant at net
     answer: The grip change to Continental is long, and there may not be time to make it
-    explanation: >-
-      Travelling from Western to Continental is a long way around the handle; net exchanges are
-      fast, so extreme-grip players must change grips during the approach.
+    explanation: Travelling from Western to Continental is a long way around the handle; net exchanges are fast, so extreme-grip players must change grips during the approach.

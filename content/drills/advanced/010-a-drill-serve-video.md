@@ -2,7 +2,7 @@
 skill: Serve
 title: Video Serve Analysis
 duration: 20 minutes
-equipment: 'Racquet, balls, phone/camera on a tripod'
+equipment: Racquet, balls, phone/camera on a tripod
 goal: Identify kinetic chain breakdowns using video feedback.
 ---
 

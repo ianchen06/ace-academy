@@ -1,8 +1,8 @@
 ---
 skill: Footwork
-title: 'Neutral, Semi-Open, Open'
+title: Neutral, Semi-Open, Open
 duration: 15 minutes
-equipment: 'Racquet, balls, a feeder'
+equipment: Racquet, balls, a feeder
 goal: Choose a stance based on where the ball is instead of defaulting to one.
 ---
 

@@ -2,7 +2,7 @@
 skill: Footwork
 title: Explosive First Step Reactions
 duration: 15 minutes
-equipment: 'Racquet, a partner, cones'
+equipment: Racquet, a partner, cones
 goal: Cut the gap between recognising a ball and pushing off toward it.
 ---
 

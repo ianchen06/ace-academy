@@ -10,9 +10,7 @@ questions:
       - Tiebreak
       - Advantage
     answer: Deuce
-    explanation: >-
-      When both players reach 40, the score is called "deuce," and a player must win by two clear
-      points.
+    explanation: When both players reach 40, the score is called "deuce," and a player must win by two clear points.
   - id: q2
     question: How many games must you win to win a standard set (assuming no tiebreak needed)?
     options:
@@ -39,9 +37,7 @@ questions:
       - Hitting the ball out of bounds twice
       - A foot fault on the first serve only
     answer: Missing both your first and second serve attempts
-    explanation: >-
-      A double fault occurs when both your first and second serve attempts fail to land in — the
-      point goes to your opponent.
+    explanation: A double fault occurs when both your first and second serve attempts fail to land in — the point goes to your opponent.
   - id: q5
     question: In a standard 7-point tiebreak, how must a player win?
     options:

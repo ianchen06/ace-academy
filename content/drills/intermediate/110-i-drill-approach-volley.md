@@ -2,7 +2,7 @@
 skill: Net Play
 title: Approach-Volley-Volley Sequence
 duration: 15 minutes
-equipment: 'Racquet, balls, a feeder'
+equipment: Racquet, balls, a feeder
 goal: Link an approach shot to two clean finishing volleys.
 ---
 

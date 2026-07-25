@@ -2,10 +2,8 @@
 skill: Footwork
 title: Shuffle and Recover
 duration: 10 minutes
-equipment: 'Racquet, 2 cones'
-goal: >-
-  Learn to move sideways and return to the middle without crossing your feet
-  under pressure.
+equipment: Racquet, 2 cones
+goal: Learn to move sideways and return to the middle without crossing your feet under pressure.
 ---
 
 1. Place two cones about 12 feet apart with the centre mark between them.

@@ -2,7 +2,7 @@
 skill: Footwork
 title: Wide-Ball Recovery
 duration: 10 minutes
-equipment: 'Racquet, balls, a feeder'
+equipment: Racquet, balls, a feeder
 goal: Practice recovering to center after being pulled wide.
 ---
 

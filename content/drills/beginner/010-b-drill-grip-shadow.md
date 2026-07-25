@@ -3,9 +3,7 @@ skill: Fundamentals
 title: Grip Shadow Swings
 duration: 5 minutes
 equipment: Racquet only
-goal: >-
-  Build muscle memory for switching between Eastern forehand and Continental
-  grips.
+goal: Build muscle memory for switching between Eastern forehand and Continental grips.
 ---
 
 1. Hold your racquet and find the Eastern forehand grip, checking the base knuckle sits on the third bevel.

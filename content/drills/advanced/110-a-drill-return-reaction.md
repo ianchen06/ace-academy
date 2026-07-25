@@ -2,7 +2,7 @@
 skill: Return of Serve
 title: Compact Return Reaction Drill
 duration: 15 minutes
-equipment: 'Racquet, balls, a partner or ball machine'
+equipment: Racquet, balls, a partner or ball machine
 goal: Shorten the backswing and improve return depth against fast serves.
 ---
 

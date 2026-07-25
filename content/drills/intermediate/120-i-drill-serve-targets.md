@@ -2,7 +2,7 @@
 skill: Serve
 title: Serve to Three Targets
 duration: 15 minutes
-equipment: 'Racquet, balls, 3 cones or markers'
+equipment: Racquet, balls, 3 cones or markers
 goal: 'Develop directional control: wide, body, and down the T.'
 ---
 

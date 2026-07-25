@@ -2,8 +2,8 @@
 skill: Serve
 title: Toss Consistency Drill
 duration: 10 minutes
-equipment: 'Racquet, balls'
-goal: 'Develop a repeatable, accurate ball toss.'
+equipment: Racquet, balls
+goal: Develop a repeatable, accurate ball toss.
 ---
 
 1. Stand in your serve stance without swinging.

@@ -2,7 +2,7 @@
 skill: Doubles
 title: Australian Formation Points
 duration: 20 minutes
-equipment: 'Racquet, balls, 3 other players'
+equipment: Racquet, balls, 3 other players
 goal: Practice executing and returning against the Australian (I) formation.
 ---
 

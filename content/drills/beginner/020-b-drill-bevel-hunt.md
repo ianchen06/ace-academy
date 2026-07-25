@@ -3,7 +3,7 @@ skill: Fundamentals
 title: Bevel Hunt
 duration: 5 minutes
 equipment: Racquet only
-goal: 'Learn to find any grip by feel, using the handle bevels as landmarks.'
+goal: Learn to find any grip by feel, using the handle bevels as landmarks.
 ---
 
 1. Sit down with the racquet and run your index finger around the eight bevels of the handle, counting them out loud from bevel 1 (the flat top when the racquet is on edge) clockwise for a right-hander.
