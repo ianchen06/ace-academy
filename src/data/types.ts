@@ -14,7 +14,8 @@ export interface Lesson {
   category: string
   title: string
   summary: string
-  content: string[]
+  /** Lesson prose, compiled from `content/lessons/**` Markdown at build time. */
+  html: string
   tips: string[]
   drillIds?: string[]
 }

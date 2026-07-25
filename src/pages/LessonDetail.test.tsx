@@ -11,6 +11,12 @@ const second = beginnerLessons[1]
 const last = beginnerLessons[beginnerLessons.length - 1]
 const withDrills = lessons.find((l) => (l.drillIds?.length ?? 0) > 0)!
 
+function paragraphsOf(html: string): string[] {
+  const host = document.createElement('div')
+  host.innerHTML = html
+  return [...host.querySelectorAll('p')].map((p) => p.textContent!)
+}
+
 function renderLesson(levelId: string, lessonId: string) {
   return renderWithProviders(<LessonDetail />, {
     route: `/curriculum/${levelId}/${lessonId}`,
@@ -26,11 +32,22 @@ describe('LessonDetail', () => {
     expect(screen.getByText(first.summary)).toBeInTheDocument()
   })
 
-  it('renders every content paragraph', () => {
+  it('renders every paragraph of the compiled lesson prose', () => {
     renderLesson('beginner', first.id)
-    for (const para of first.content) {
+    for (const para of paragraphsOf(first.html)) {
       expect(screen.getByText(para)).toBeInTheDocument()
     }
+  })
+
+  // The prose is compiled to HTML at build time and injected, so the failure to
+  // guard against is it arriving on screen as escaped markup: a lesson reading
+  // "<p>Grip is the foundation…</p>" rather than a formatted paragraph.
+  it('renders the compiled html as markup rather than escaping it', () => {
+    const { container } = renderLesson('beginner', first.id)
+    expect(container.querySelectorAll('.lesson-content p')).toHaveLength(
+      paragraphsOf(first.html).length,
+    )
+    expect(screen.queryByText(/<p>/)).not.toBeInTheDocument()
   })
 
   it('renders the coaching tips', () => {

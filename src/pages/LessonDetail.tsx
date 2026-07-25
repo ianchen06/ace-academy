@@ -35,11 +35,13 @@ export function LessonDetail() {
       <h1>{lesson.title}</h1>
       <p className="page-intro">{lesson.summary}</p>
 
-      <div className="lesson-content">
-        {lesson.content.map((para, i) => (
-          <p key={i}>{para}</p>
-        ))}
-      </div>
+      {/*
+        `lesson.html` is compiled at build time from `content/lessons/**` by the
+        ace-content Vite plugin, with markdown-it configured `html: false` so raw
+        tags in the source are escaped rather than passed through. If content ever
+        arrives from outside a reviewed PR (a CMS), sanitise in the plugin.
+      */}
+      <div className="lesson-content" dangerouslySetInnerHTML={{ __html: lesson.html }} />
 
       {lesson.tips.length > 0 && (
         <div className="tips-box">

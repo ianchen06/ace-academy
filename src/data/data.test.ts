@@ -4,6 +4,7 @@ import { lessons } from './curriculum'
 import { drills } from './drills'
 import { quizzes } from './quizzes'
 import type { LevelId } from './types'
+import { lessonBlocks, lessonText } from '../test/lessonText'
 
 const levelIds = levels.map((l) => l.id)
 const FOOTWORK_CATEGORY = 'Footwork & Movement'
@@ -62,7 +63,8 @@ describe('lessons', () => {
     for (const lesson of lessons) {
       expect(lesson.title.trim(), `lesson ${lesson.id} title`).not.toBe('')
       expect(lesson.summary.trim(), `lesson ${lesson.id} summary`).not.toBe('')
-      expect(lesson.content.length, `lesson ${lesson.id} content`).toBeGreaterThan(0)
+      expect(lesson.html.trim(), `lesson ${lesson.id} html`).not.toBe('')
+      expect(lesson.html, `lesson ${lesson.id} html`).toContain('<p>')
       expect(lesson.tips.length, `lesson ${lesson.id} tips`).toBeGreaterThan(0)
     }
   })
@@ -214,7 +216,7 @@ describe('grip coverage', () => {
   })
 
   it('names every major grip in the grip-selection lesson', () => {
-    const text = (gripSelection?.content ?? []).join(' ')
+    const text = lessonText(gripSelection)
     for (const grip of GRIPS) {
       expect(text, `grip ${grip}`).toContain(grip)
     }
@@ -227,7 +229,7 @@ describe('grip coverage', () => {
   it('always places the Continental grip on the second bevel', () => {
     const numberedBevel = /bevel \d|(?:first|second|third|fourth|fifth|sixth|seventh|eighth) bevel/i
     for (const lesson of lessons) {
-      for (const sentence of lesson.content.flatMap((para) => para.split(/(?<=\.)\s+/))) {
+      for (const sentence of lessonBlocks(lesson).flatMap((block) => block.split(/(?<=\.)\s+/))) {
         if (sentence.includes('Continental') && numberedBevel.test(sentence)) {
           expect(sentence, `lesson ${lesson.id}`).toMatch(/second bevel|bevel 2/i)
         }
@@ -240,7 +242,7 @@ describe('grip coverage', () => {
   })
 
   it('compares every major grip when explaining how grip changes the forehand', () => {
-    const text = (gripEffects?.content ?? []).join(' ')
+    const text = lessonText(gripEffects)
     for (const grip of GRIPS) {
       expect(text, `grip ${grip}`).toContain(grip)
     }
@@ -272,10 +274,10 @@ describe('step-by-step forehand guides', () => {
 
   it('numbers the steps sequentially from 1', () => {
     for (const [id, guide] of guides) {
-      const steps = (guide?.content ?? []).filter((para) => /^Step \d+ —/.test(para))
+      const steps = lessonBlocks(guide).filter((block) => /^Step \d+ —/.test(block))
       expect(steps.length, `guide ${id} step count`).toBeGreaterThanOrEqual(6)
       expect(
-        steps.map((para) => Number(para.match(/^Step (\d+) —/)![1])),
+        steps.map((block) => Number(block.match(/^Step (\d+) —/)![1])),
         `guide ${id} step numbering`,
       ).toEqual(steps.map((_, i) => i + 1))
     }
@@ -297,14 +299,14 @@ describe('pro-style forehand technique lessons', () => {
 
   it('has a lesson on the Federer-style Eastern forehand', () => {
     expect(federer).toBeDefined()
-    const text = (federer?.content ?? []).join(' ')
+    const text = lessonText(federer)
     expect(text).toContain('Federer')
     expect(text).toContain('Eastern')
   })
 
   it('has a lesson on the Nadal-style Semi-Western forehand', () => {
     expect(nadal).toBeDefined()
-    const text = (nadal?.content ?? []).join(' ')
+    const text = lessonText(nadal)
     expect(text).toContain('Nadal')
     expect(text).toContain('Semi-Western')
   })
