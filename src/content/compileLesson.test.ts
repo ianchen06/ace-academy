@@ -34,6 +34,11 @@ describe('compileLesson', () => {
       expect(() => compileLesson(source(VALID), path)).toThrow(/ordering prefix/)
     })
 
+    it('rejects an id whose level prefix disagrees with its directory', () => {
+      const path = '/repo/content/lessons/beginner/010-i-topspin.md'
+      expect(() => compileLesson(source(VALID), path)).toThrow(/should be named "b-topspin"/)
+    })
+
     it('names the offending file in every error it throws', () => {
       const path = '/repo/content/lessons/beginner/010-b-grip.md'
       expect(() => compileLesson(source('title: Only a title'), path)).toThrow(/010-b-grip\.md/)
