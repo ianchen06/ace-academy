@@ -3,6 +3,7 @@ import { levels } from '../data/levels'
 import { drills } from '../data/drills'
 import type { LevelId } from '../data/types'
 import { useProgress } from '../hooks/useProgress'
+import { CompiledContent } from '../components/CompiledContent'
 
 export function Drills() {
   const [levelFilter, setLevelFilter] = useState<LevelId | 'all'>('all')
@@ -100,11 +101,7 @@ export function Drills() {
                 <span>🎾 {drill.equipment}</span>
               </div>
               <p className="drill-goal">{drill.goal}</p>
-              <ol className="drill-steps">
-                {drill.instructions.map((step, i) => (
-                  <li key={i}>{step}</li>
-                ))}
-              </ol>
+              <CompiledContent html={drill.html} className="drill-steps" />
               <button type="button" className={`btn ${complete ? 'btn-outline' : 'btn-primary'}`} onClick={() => toggleDrill(drill.id)}>
                 {complete ? '✓ Completed' : 'Mark complete'}
               </button>

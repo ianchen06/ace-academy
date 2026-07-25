@@ -1,0 +1,57 @@
+topic: Fundamentals
+title: Grip & Stroke Fundamentals
+description: Check your understanding of grips, stance, and the basic forehand.
+questions:
+  - id: q1
+    question: Which grip is most commonly used for serves and volleys?
+    options:
+      - Eastern forehand grip
+      - Western grip
+      - Continental grip
+      - Semi-Western grip
+    answer: Continental grip
+    explanation: The Continental grip is the standard grip for serves, volleys, and overheads.
+  - id: q2
+    question: What is the purpose of the split step?
+    options:
+      - To slow the game down
+      - To land balanced and ready to push off explosively as your opponent hits
+      - To signal your partner in doubles
+      - To save energy during long rallies
+    answer: To land balanced and ready to push off explosively as your opponent hits
+    explanation: >-
+      The split step times a light hop to land as your opponent contacts the ball, letting you react
+      and push off quickly in any direction.
+  - id: q3
+    question: >-
+      On a basic topspin forehand, what direction should the racquet generally travel through
+      contact?
+    options:
+      - High to low
+      - Low to high
+      - Side to side only
+      - Straight back to straight forward with no vertical movement
+    answer: Low to high
+    explanation: A low-to-high racquet path brushes up the back of the ball, creating natural topspin.
+  - id: q4
+    question: Roughly how tight should your grip pressure be during a stroke?
+    options:
+      - As tight as possible for maximum control
+      - Completely loose, barely holding the racquet
+      - Relaxed, moderate pressure — like holding a small bird
+      - It doesn't matter as long as you don't drop the racquet
+    answer: Relaxed, moderate pressure — like holding a small bird
+    explanation: >-
+      A relaxed, moderate grip allows for racquet head speed and feel; an overly tight grip creates
+      tension that reduces power and touch.
+  - id: q5
+    question: What is the main advantage of a two-handed backhand for beginners?
+    options:
+      - It provides more reach than a one-handed backhand
+      - It is generally easier to control while learning
+      - It requires a different grip for every shot
+      - It is only usable on clay courts
+    answer: It is generally easier to control while learning
+    explanation: >-
+      The two-handed backhand offers more stability and control for beginners, which is why many
+      players start with it.

@@ -44,12 +44,14 @@ Three layers, all gating deploys via `.github/workflows/test.yml`:
 
 **Data integrity** (`src/data/data.test.ts`) — the curriculum is static content, so it is
 guarded by invariants rather than coverage: unique ids, referential integrity between
-lessons and drills, and `correctIndex` pointing at a real option. An off-by-one there
-would silently mark correct quiz answers wrong for every user.
+lessons and drills, and `correctIndex` pointing at a real option. Most of these are now
+*also* enforced by the content compilers, which fail the build at the point of authoring;
+the tests stay as defence in depth and to guard the compilers themselves.
 
 **Unit + component** (`src/**/*.test.tsx`, Vitest + Testing Library, jsdom) — contexts,
 hooks, components and pages. Coverage thresholds are **90%** on lines, branches, functions
-and statements; `src/data/**` is excluded because it is content, not logic.
+and statements; `src/data/**` is excluded because it is content, not logic. The content
+*pipeline* in `src/content/**` is logic and is covered like everything else.
 
 **End-to-end** (`e2e/`, Playwright + Chromium) — real user journeys against a production
 build served by `vite preview`.
@@ -95,9 +97,96 @@ Never hit a real Supabase project from tests.
    Covered by "never overwrites the cloud row after a failed read" and the e2e
    "the app stays usable when the backend read fails".
 
+## Authoring content
+
+All curriculum content lives under `content/`, one file per item, named
+`<level>/<order>-<id>.<ext>`. Lessons and drills are Markdown; quizzes are YAML. The
+strategy and the remaining phase (an optional git-backed CMS) are in
+`docs/engineering/content-authoring-strategy.md`.
+
+### Lessons — `content/lessons/<level>/<order>-<id>.md`
+
+```markdown
+---
+category: Fundamentals          # required
+title: The Grip                 # required
+summary: One line for the card. # required
+tips:                           # required, at least one
+  - Coaching tip shown in the tips box.
+drills: [b-drill-grip-shadow]   # optional, must be drills from the same level
+---
+
+Body is Markdown: headings, lists, **bold**, links, images, tables, blockquotes.
+```
+
+### Drills — `content/drills/<level>/<order>-<id>.md`
+
+```markdown
+---
+skill: Fundamentals             # required, drives the skill filter chips
+title: Grip Shadow Swings       # required
+duration: 5 minutes             # required
+equipment: Racquet only         # required
+goal: One line on what it builds. # required
+---
+
+1. The steps, as a Markdown ordered list.
+2. A drill body without one fails the build — a drill is a numbered routine.
+```
+
+### Quizzes — `content/quizzes/<level>/<order>-<id>.yml`
+
+```yaml
+topic: Rules & Scoring          # required, shown as the section heading
+title: Rules & Scoring Basics   # required
+description: One line for the card. # required
+questions:                      # required, at least one
+  - id: q1
+    question: What is the score when both players have 40?
+    options: [Match point, Deuce, Tiebreak, Advantage]
+    answer: Deuce               # the text, not an index — must match an option exactly
+    explanation: Shown after the question is answered.
+```
+
+**Author the answer, never the index.** `correctIndex` is derived at build time from
+`answer`, and an answer matching no option fails the build. A hand-written index is a
+number nobody can proofread, and an off-by-one silently marks correct answers wrong for
+every user who takes the quiz.
+
+### Rules the pipeline enforces, and why
+
+- **The filename is the identity.** `010-b-grip.md` means order `010`, id `b-grip`. Ids are
+  persisted in user progress, so **renaming a file wipes that lesson's completions for every
+  existing user** — `contentIds.test.ts` snapshots the id set for lessons, drills and
+  quizzes alike, so a rename is a visible, deliberate diff rather than an accident.
+- **Order is the numeric prefix**, in steps of 10 so a lesson can be inserted without
+  renaming its neighbours. Duplicate prefixes within a level fail the build.
+- **Unknown frontmatter keys fail the build.** A typo'd `tip:` would otherwise silently
+  publish a lesson with no coaching tips.
+- **Markdown is rendered at build time** by the `ace-content` Vite plugin, never in the
+  browser, with `html: false` — raw tags in a file are escaped, not passed through. If
+  content ever arrives from outside a reviewed PR (a CMS), sanitise in the plugin, because
+  `LessonDetail` and `Drills` inject the compiled HTML.
+- **Validation runs on the node side**, inside the plugin, so bad content fails `dev`,
+  `build` and `vitest` with the file path and a reason — and no parser or validator reaches
+  the browser bundle.
+- **Cross-links are absolute app paths**: `[the grip](/curriculum/beginner/b-grip)`. They go
+  through the router via `CompiledContent`, so they navigate without reloading the app, and
+  `data.test.ts` fails if one points at a route that does not exist. Compilers see one file
+  at a time, so link integrity is necessarily a test rather than a build check.
+
 ## Architecture notes
 
-- `src/data/` — static curriculum: levels, lessons, drills, quizzes. Pure content.
+- `content/` — all curriculum content, one file per item: `lessons/` and `drills/` as
+  Markdown with YAML frontmatter, `quizzes/` as YAML. See "Authoring content" above.
+- `src/content/` — the content pipeline: `compile.ts` (shared path identity, frontmatter
+  and field validation, Markdown rendering), `compileLesson` / `compileDrill` /
+  `compileQuiz`, and `orderContent` (curriculum order from filename prefixes). Logic, not
+  content.
+- `plugins/aceContent.ts` — the Vite plugin that runs the right compiler per collection at
+  build time.
+- `src/data/` — what the app consumes: `levels` (still TypeScript, three of them) plus
+  `lessons`, `drills` and `quizzes`, each a glob of `content/` handed to `orderContent`.
 - `src/context/` — `AuthContext` (Supabase session) and `ProgressContext` (local-first
   progress with cloud merge). Context objects live in separate `*ContextDef.ts` files so the
   provider modules stay fast-refresh friendly.

@@ -4,6 +4,7 @@ import { lessons } from './curriculum'
 import { drills } from './drills'
 import { quizzes } from './quizzes'
 import type { LevelId } from './types'
+import { internalLinks, renderedBlocks, renderedElements, renderedText } from '../test/compiledText'
 
 const levelIds = levels.map((l) => l.id)
 const FOOTWORK_CATEGORY = 'Footwork & Movement'
@@ -62,7 +63,8 @@ describe('lessons', () => {
     for (const lesson of lessons) {
       expect(lesson.title.trim(), `lesson ${lesson.id} title`).not.toBe('')
       expect(lesson.summary.trim(), `lesson ${lesson.id} summary`).not.toBe('')
-      expect(lesson.content.length, `lesson ${lesson.id} content`).toBeGreaterThan(0)
+      expect(lesson.html.trim(), `lesson ${lesson.id} html`).not.toBe('')
+      expect(lesson.html, `lesson ${lesson.id} html`).toContain('<p>')
       expect(lesson.tips.length, `lesson ${lesson.id} tips`).toBeGreaterThan(0)
     }
   })
@@ -105,7 +107,8 @@ describe('drills', () => {
 
   it('has instructions and populated metadata everywhere', () => {
     for (const drill of drills) {
-      expect(drill.instructions.length, `drill ${drill.id} instructions`).toBeGreaterThan(0)
+      expect(renderedBlocks(drill.html).length, `drill ${drill.id} steps`).toBeGreaterThan(0)
+      expect(drill.html, `drill ${drill.id} steps`).toContain('<ol>')
       expect(drill.duration.trim(), `drill ${drill.id} duration`).not.toBe('')
       expect(drill.equipment.trim(), `drill ${drill.id} equipment`).not.toBe('')
       expect(drill.goal.trim(), `drill ${drill.id} goal`).not.toBe('')
@@ -214,7 +217,7 @@ describe('grip coverage', () => {
   })
 
   it('names every major grip in the grip-selection lesson', () => {
-    const text = (gripSelection?.content ?? []).join(' ')
+    const text = renderedText(gripSelection?.html)
     for (const grip of GRIPS) {
       expect(text, `grip ${grip}`).toContain(grip)
     }
@@ -227,7 +230,7 @@ describe('grip coverage', () => {
   it('always places the Continental grip on the second bevel', () => {
     const numberedBevel = /bevel \d|(?:first|second|third|fourth|fifth|sixth|seventh|eighth) bevel/i
     for (const lesson of lessons) {
-      for (const sentence of lesson.content.flatMap((para) => para.split(/(?<=\.)\s+/))) {
+      for (const sentence of renderedBlocks(lesson.html).flatMap((block) => block.split(/(?<=\.)\s+/))) {
         if (sentence.includes('Continental') && numberedBevel.test(sentence)) {
           expect(sentence, `lesson ${lesson.id}`).toMatch(/second bevel|bevel 2/i)
         }
@@ -240,7 +243,7 @@ describe('grip coverage', () => {
   })
 
   it('compares every major grip when explaining how grip changes the forehand', () => {
-    const text = (gripEffects?.content ?? []).join(' ')
+    const text = renderedText(gripEffects?.html)
     for (const grip of GRIPS) {
       expect(text, `grip ${grip}`).toContain(grip)
     }
@@ -270,12 +273,17 @@ describe('step-by-step forehand guides', () => {
     expect(guides.map(([, guide]) => guide?.levelId)).toEqual(['beginner', 'intermediate', 'advanced'])
   })
 
+  // Steps may be formatted as headings, paragraphs or list items — the guides
+  // are authored Markdown and that is an editorial choice. The invariant is the
+  // numbering, so scan every block form rather than assuming one of them.
   it('numbers the steps sequentially from 1', () => {
     for (const [id, guide] of guides) {
-      const steps = (guide?.content ?? []).filter((para) => /^Step \d+ —/.test(para))
+      const steps = renderedElements(guide?.html, 'h2, h3, h4, p, li').filter((block) =>
+        /^Step \d+ —/.test(block),
+      )
       expect(steps.length, `guide ${id} step count`).toBeGreaterThanOrEqual(6)
       expect(
-        steps.map((para) => Number(para.match(/^Step (\d+) —/)![1])),
+        steps.map((block) => Number(block.match(/^Step (\d+) —/)![1])),
         `guide ${id} step numbering`,
       ).toEqual(steps.map((_, i) => i + 1))
     }
@@ -297,14 +305,14 @@ describe('pro-style forehand technique lessons', () => {
 
   it('has a lesson on the Federer-style Eastern forehand', () => {
     expect(federer).toBeDefined()
-    const text = (federer?.content ?? []).join(' ')
+    const text = renderedText(federer?.html)
     expect(text).toContain('Federer')
     expect(text).toContain('Eastern')
   })
 
   it('has a lesson on the Nadal-style Semi-Western forehand', () => {
     expect(nadal).toBeDefined()
-    const text = (nadal?.content ?? []).join(' ')
+    const text = renderedText(nadal?.html)
     expect(text).toContain('Nadal')
     expect(text).toContain('Semi-Western')
   })
@@ -316,6 +324,43 @@ describe('pro-style forehand technique lessons', () => {
       for (const drillId of lesson?.drillIds ?? []) {
         expect(drillLevel.get(drillId), `lesson ${lesson?.id} -> drill ${drillId}`).toBe(lesson?.levelId)
       }
+    }
+  })
+})
+
+// Cross-links between lessons are the payoff of authoring in Markdown, but a
+// link is only as good as its target: renaming a content file silently turns
+// every link to it into a 404 the author never sees. Ids are already snapshotted
+// (contentIds.test.ts); this closes the other half by checking the links.
+describe('internal content links', () => {
+  const staticRoutes = new Set(['/', '/curriculum', '/drills', '/quizzes', '/account'])
+  const lessonPaths = new Set(lessons.map((l) => `/curriculum/${l.levelId}/${l.id}`))
+  const levelPaths = new Set(levels.map((l) => `/curriculum/${l.id}`))
+  const quizPaths = new Set(quizzes.map((q) => `/quizzes/${q.id}`))
+
+  const sources = [
+    ...lessons.map((l) => [`lesson ${l.id}`, l.html] as const),
+    ...drills.map((d) => [`drill ${d.id}`, d.html] as const),
+  ]
+
+  it('only links to routes that exist', () => {
+    for (const [label, html] of sources) {
+      for (const href of internalLinks(html)) {
+        const path = href.split(/[?#]/)[0]!
+        const known =
+          staticRoutes.has(path) ||
+          lessonPaths.has(path) ||
+          levelPaths.has(path) ||
+          quizPaths.has(path)
+        expect(known, `${label} links to ${href}, which is not a route in this app`).toBe(true)
+      }
+    }
+  })
+
+  it('never links a lesson to itself', () => {
+    for (const lesson of lessons) {
+      const self = `/curriculum/${lesson.levelId}/${lesson.id}`
+      expect(internalLinks(lesson.html), `lesson ${lesson.id}`).not.toContain(self)
     }
   })
 })

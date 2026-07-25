@@ -14,7 +14,8 @@ export interface Lesson {
   category: string
   title: string
   summary: string
-  content: string[]
+  /** Lesson prose, compiled from `content/lessons/**` Markdown at build time. */
+  html: string
   tips: string[]
   drillIds?: string[]
 }
@@ -27,7 +28,8 @@ export interface Drill {
   duration: string
   equipment: string
   goal: string
-  instructions: string[]
+  /** Drill steps, compiled from `content/drills/**` Markdown at build time. */
+  html: string
 }
 
 export interface QuizQuestion {

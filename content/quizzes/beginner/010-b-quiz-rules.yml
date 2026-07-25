@@ -1,0 +1,62 @@
+topic: Rules & Scoring
+title: Rules & Scoring Basics
+description: Test your knowledge of how points, games, and sets work.
+questions:
+  - id: q1
+    question: What is the score called when both players have 40 points in a game?
+    options:
+      - Match point
+      - Deuce
+      - Tiebreak
+      - Advantage
+    answer: Deuce
+    explanation: >-
+      When both players reach 40, the score is called "deuce," and a player must win by two clear
+      points.
+  - id: q2
+    question: How many games must you win to win a standard set (assuming no tiebreak needed)?
+    options:
+      - 4 games, win by 1
+      - 6 games, win by 2
+      - 8 games, win by 1
+      - 5 games, win by 1
+    answer: 6 games, win by 2
+    explanation: A set is won by the first player to reach 6 games with a margin of at least 2 (e.g. 6-4).
+  - id: q3
+    question: What happens if a serve clips the net cord and still lands in the correct service box?
+    options:
+      - It counts as a fault
+      - The point is awarded to the receiver
+      - It is a "let" and the serve is replayed
+      - It counts as an ace
+    answer: It is a "let" and the serve is replayed
+    explanation: A serve that touches the net but still lands in is called a "let" and is simply replayed.
+  - id: q4
+    question: What is a "double fault"?
+    options:
+      - Hitting two aces in a row
+      - Missing both your first and second serve attempts
+      - Hitting the ball out of bounds twice
+      - A foot fault on the first serve only
+    answer: Missing both your first and second serve attempts
+    explanation: >-
+      A double fault occurs when both your first and second serve attempts fail to land in — the
+      point goes to your opponent.
+  - id: q5
+    question: In a standard 7-point tiebreak, how must a player win?
+    options:
+      - First to 7 points, no matter the margin
+      - First to 7 points, win by at least 2
+      - First to 5 points, win by 1
+      - First to 10 points, win by 2
+    answer: First to 7 points, win by at least 2
+    explanation: A standard tiebreak is played to 7 points and must be won by a margin of at least 2.
+  - id: q6
+    question: Is a ball that lands exactly on the boundary line considered in or out?
+    options:
+      - Out
+      - In
+      - Replayed automatically
+      - Depends on the surface
+    answer: In
+    explanation: Lines are part of the court, so a ball touching any part of the line is considered "in."

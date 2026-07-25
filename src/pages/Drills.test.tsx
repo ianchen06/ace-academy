@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { screen, within } from '@testing-library/react'
 import { drills } from '../data/drills'
+import { renderedBlocks } from '../test/compiledText'
 import { readStoredProgress, renderWithProviders, seedProgress } from '../test/renderWithProviders'
 import { Drills } from './Drills'
 
@@ -32,7 +33,7 @@ describe('Drills', () => {
     expect(card.getByText(first.goal)).toBeInTheDocument()
     expect(card.getByText(`⏱ ${first.duration}`)).toBeInTheDocument()
     expect(card.getByText(`🎾 ${first.equipment}`)).toBeInTheDocument()
-    for (const step of first.instructions) {
+    for (const step of renderedBlocks(first.html)) {
       expect(card.getByText(step)).toBeInTheDocument()
     }
   })

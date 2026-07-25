@@ -3,6 +3,7 @@ import { levelById } from '../data/levels'
 import { lessons } from '../data/curriculum'
 import { drills } from '../data/drills'
 import { useProgress } from '../hooks/useProgress'
+import { CompiledContent } from '../components/CompiledContent'
 
 export function LessonDetail() {
   const { levelId, lessonId } = useParams<{ levelId: string; lessonId: string }>()
@@ -35,11 +36,7 @@ export function LessonDetail() {
       <h1>{lesson.title}</h1>
       <p className="page-intro">{lesson.summary}</p>
 
-      <div className="lesson-content">
-        {lesson.content.map((para, i) => (
-          <p key={i}>{para}</p>
-        ))}
-      </div>
+      <CompiledContent html={lesson.html} className="lesson-content" />
 
       {lesson.tips.length > 0 && (
         <div className="tips-box">

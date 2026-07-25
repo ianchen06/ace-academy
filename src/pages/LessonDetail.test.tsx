@@ -4,6 +4,7 @@ import { lessons } from '../data/curriculum'
 import { drills } from '../data/drills'
 import { readStoredProgress, renderWithProviders, seedProgress } from '../test/renderWithProviders'
 import { LessonDetail } from './LessonDetail'
+import { renderedParagraphs } from '../test/compiledText'
 
 const beginnerLessons = lessons.filter((l) => l.levelId === 'beginner')
 const first = beginnerLessons[0]
@@ -26,11 +27,22 @@ describe('LessonDetail', () => {
     expect(screen.getByText(first.summary)).toBeInTheDocument()
   })
 
-  it('renders every content paragraph', () => {
+  it('renders every paragraph of the compiled lesson prose', () => {
     renderLesson('beginner', first.id)
-    for (const para of first.content) {
+    for (const para of renderedParagraphs(first.html)) {
       expect(screen.getByText(para)).toBeInTheDocument()
     }
+  })
+
+  // The prose is compiled to HTML at build time and injected, so the failure to
+  // guard against is it arriving on screen as escaped markup: a lesson reading
+  // "<p>Grip is the foundation…</p>" rather than a formatted paragraph.
+  it('renders the compiled html as markup rather than escaping it', () => {
+    const { container } = renderLesson('beginner', first.id)
+    expect(container.querySelectorAll('.lesson-content p')).toHaveLength(
+      renderedParagraphs(first.html).length,
+    )
+    expect(screen.queryByText(/<p>/)).not.toBeInTheDocument()
   })
 
   it('renders the coaching tips', () => {
