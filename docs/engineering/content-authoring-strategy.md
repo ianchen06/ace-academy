@@ -125,32 +125,34 @@ per-user mutable state. Curriculum is neither. **Rejected.**
 content/
   lessons/
     beginner/
-      010-grip.md
-      020-grip-selection.md
-      030-ready-position.md
+      010-b-grip.md
+      020-b-grip-selection.md
       ...
     intermediate/…
     advanced/…
   drills/
     beginner/
-      grip-shadow.md
+      010-b-drill-grip-shadow.md
       ...
   quizzes/
     beginner/
-      rules.yml
+      010-b-quiz-rules.yml
       ...
-  levels.yml
 src/
   content/            # the pipeline (logic — coverage applies)
-    compileLesson.ts  # frontmatter validation + markdown render
-    orderLessons.ts   # curriculum order from filename prefixes
+    compile.ts        # shared: path identity, frontmatter, field validation, render
+    compileLesson.ts
+    compileDrill.ts
+    compileQuiz.ts
+    orderContent.ts   # curriculum order from filename prefixes
   data/               # unchanged public API: `lessons`, `drills`, `quizzes`, `levels`
 plugins/
-  aceContent.ts       # Vite plugin: runs the compile at build time (node-side)
+  aceContent.ts       # Vite plugin: picks the compiler per collection, at build time
 ```
 
 `src/data/*` keeps exporting the same arrays with the same types, so **no page, hook or
-component changes** except `LessonDetail` (which renders HTML instead of mapping paragraphs).
+component changes** except `LessonDetail` and `Drills` (which render HTML instead of mapping
+arrays). `levels` stays TypeScript — there are three of them and they carry a UI colour.
 
 ### 5.2 A lesson file
 
