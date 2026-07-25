@@ -833,9 +833,20 @@ li {
   color: var(--text);
 }
 
+/* A wrapper around compiled Markdown, so a drill can open with a lead-in
+   paragraph before its numbered steps. */
 .drill-steps {
   font-size: 0.88rem;
   flex: 1;
+}
+
+.drill-steps > :last-child {
+  margin-bottom: 0;
+}
+
+.drill-steps strong {
+  color: var(--text-h);
+  font-weight: 600;
 }
 
 /* ---------- Quizzes ---------- */

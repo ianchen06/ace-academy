@@ -100,11 +100,9 @@ export function Drills() {
                 <span>🎾 {drill.equipment}</span>
               </div>
               <p className="drill-goal">{drill.goal}</p>
-              <ol className="drill-steps">
-                {drill.instructions.map((step, i) => (
-                  <li key={i}>{step}</li>
-                ))}
-              </ol>
+              {/* Compiled at build time from content/drills/**; see LessonDetail
+                  for the same pattern and the note on sanitising CMS content. */}
+              <div className="drill-steps" dangerouslySetInnerHTML={{ __html: drill.html }} />
               <button type="button" className={`btn ${complete ? 'btn-outline' : 'btn-primary'}`} onClick={() => toggleDrill(drill.id)}>
                 {complete ? '✓ Completed' : 'Mark complete'}
               </button>

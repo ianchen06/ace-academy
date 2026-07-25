@@ -28,7 +28,8 @@ export interface Drill {
   duration: string
   equipment: string
   goal: string
-  instructions: string[]
+  /** Drill steps, compiled from `content/drills/**` Markdown at build time. */
+  html: string
 }
 
 export interface QuizQuestion {

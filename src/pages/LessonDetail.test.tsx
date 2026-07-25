@@ -4,18 +4,13 @@ import { lessons } from '../data/curriculum'
 import { drills } from '../data/drills'
 import { readStoredProgress, renderWithProviders, seedProgress } from '../test/renderWithProviders'
 import { LessonDetail } from './LessonDetail'
+import { renderedParagraphs } from '../test/compiledText'
 
 const beginnerLessons = lessons.filter((l) => l.levelId === 'beginner')
 const first = beginnerLessons[0]
 const second = beginnerLessons[1]
 const last = beginnerLessons[beginnerLessons.length - 1]
 const withDrills = lessons.find((l) => (l.drillIds?.length ?? 0) > 0)!
-
-function paragraphsOf(html: string): string[] {
-  const host = document.createElement('div')
-  host.innerHTML = html
-  return [...host.querySelectorAll('p')].map((p) => p.textContent!)
-}
 
 function renderLesson(levelId: string, lessonId: string) {
   return renderWithProviders(<LessonDetail />, {
@@ -34,7 +29,7 @@ describe('LessonDetail', () => {
 
   it('renders every paragraph of the compiled lesson prose', () => {
     renderLesson('beginner', first.id)
-    for (const para of paragraphsOf(first.html)) {
+    for (const para of renderedParagraphs(first.html)) {
       expect(screen.getByText(para)).toBeInTheDocument()
     }
   })
@@ -45,7 +40,7 @@ describe('LessonDetail', () => {
   it('renders the compiled html as markup rather than escaping it', () => {
     const { container } = renderLesson('beginner', first.id)
     expect(container.querySelectorAll('.lesson-content p')).toHaveLength(
-      paragraphsOf(first.html).length,
+      renderedParagraphs(first.html).length,
     )
     expect(screen.queryByText(/<p>/)).not.toBeInTheDocument()
   })

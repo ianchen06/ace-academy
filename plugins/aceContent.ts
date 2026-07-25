@@ -1,7 +1,11 @@
 import type { Plugin } from 'vite'
 import { compileLesson } from '../src/content/compileLesson'
+import { compileDrill } from '../src/content/compileDrill'
 
-const LESSONS = '/content/lessons/'
+const COLLECTIONS = [
+  { dir: '/content/lessons/', compile: compileLesson },
+  { dir: '/content/drills/', compile: compileDrill },
+]
 
 /**
  * Compiles authored Markdown under `content/` into plain data modules.
@@ -19,8 +23,10 @@ export function aceContent(): Plugin {
     enforce: 'pre',
     transform(code, id) {
       const path = id.split('?')[0]!
-      if (!path.endsWith('.md') || !path.includes(LESSONS)) return null
-      return { code: `export default ${JSON.stringify(compileLesson(code, path))}`, map: null }
+      if (!path.endsWith('.md')) return null
+      const collection = COLLECTIONS.find(({ dir }) => path.includes(dir))
+      if (!collection) return null
+      return { code: `export default ${JSON.stringify(collection.compile(code, path))}`, map: null }
     },
   }
 }

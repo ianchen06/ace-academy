@@ -4,7 +4,7 @@ import { lessons } from './curriculum'
 import { drills } from './drills'
 import { quizzes } from './quizzes'
 import type { LevelId } from './types'
-import { lessonBlocks, lessonText } from '../test/lessonText'
+import { renderedBlocks, renderedText } from '../test/compiledText'
 
 const levelIds = levels.map((l) => l.id)
 const FOOTWORK_CATEGORY = 'Footwork & Movement'
@@ -107,7 +107,8 @@ describe('drills', () => {
 
   it('has instructions and populated metadata everywhere', () => {
     for (const drill of drills) {
-      expect(drill.instructions.length, `drill ${drill.id} instructions`).toBeGreaterThan(0)
+      expect(renderedBlocks(drill.html).length, `drill ${drill.id} steps`).toBeGreaterThan(0)
+      expect(drill.html, `drill ${drill.id} steps`).toContain('<ol>')
       expect(drill.duration.trim(), `drill ${drill.id} duration`).not.toBe('')
       expect(drill.equipment.trim(), `drill ${drill.id} equipment`).not.toBe('')
       expect(drill.goal.trim(), `drill ${drill.id} goal`).not.toBe('')
@@ -216,7 +217,7 @@ describe('grip coverage', () => {
   })
 
   it('names every major grip in the grip-selection lesson', () => {
-    const text = lessonText(gripSelection)
+    const text = renderedText(gripSelection?.html)
     for (const grip of GRIPS) {
       expect(text, `grip ${grip}`).toContain(grip)
     }
@@ -229,7 +230,7 @@ describe('grip coverage', () => {
   it('always places the Continental grip on the second bevel', () => {
     const numberedBevel = /bevel \d|(?:first|second|third|fourth|fifth|sixth|seventh|eighth) bevel/i
     for (const lesson of lessons) {
-      for (const sentence of lessonBlocks(lesson).flatMap((block) => block.split(/(?<=\.)\s+/))) {
+      for (const sentence of renderedBlocks(lesson.html).flatMap((block) => block.split(/(?<=\.)\s+/))) {
         if (sentence.includes('Continental') && numberedBevel.test(sentence)) {
           expect(sentence, `lesson ${lesson.id}`).toMatch(/second bevel|bevel 2/i)
         }
@@ -242,7 +243,7 @@ describe('grip coverage', () => {
   })
 
   it('compares every major grip when explaining how grip changes the forehand', () => {
-    const text = lessonText(gripEffects)
+    const text = renderedText(gripEffects?.html)
     for (const grip of GRIPS) {
       expect(text, `grip ${grip}`).toContain(grip)
     }
@@ -274,7 +275,7 @@ describe('step-by-step forehand guides', () => {
 
   it('numbers the steps sequentially from 1', () => {
     for (const [id, guide] of guides) {
-      const steps = lessonBlocks(guide).filter((block) => /^Step \d+ —/.test(block))
+      const steps = renderedBlocks(guide?.html).filter((block) => /^Step \d+ —/.test(block))
       expect(steps.length, `guide ${id} step count`).toBeGreaterThanOrEqual(6)
       expect(
         steps.map((block) => Number(block.match(/^Step (\d+) —/)![1])),
@@ -299,14 +300,14 @@ describe('pro-style forehand technique lessons', () => {
 
   it('has a lesson on the Federer-style Eastern forehand', () => {
     expect(federer).toBeDefined()
-    const text = lessonText(federer)
+    const text = renderedText(federer?.html)
     expect(text).toContain('Federer')
     expect(text).toContain('Eastern')
   })
 
   it('has a lesson on the Nadal-style Semi-Western forehand', () => {
     expect(nadal).toBeDefined()
-    const text = lessonText(nadal)
+    const text = renderedText(nadal?.html)
     expect(text).toContain('Nadal')
     expect(text).toContain('Semi-Western')
   })
