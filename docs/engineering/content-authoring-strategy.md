@@ -1,6 +1,7 @@
 # Content Authoring Strategy — Markdown, and (maybe) a CMS
 
-**Status:** Accepted. **Phases 1–2 implemented** (lessons are Markdown); phases 3–6 outstanding.
+**Status:** Accepted. **Phases 1–4 implemented** — all curriculum content is now authored in
+`content/`. Phases 5 (content polish) and 6 (optional CMS) outstanding.
 **Date:** 2026-07-25
 **Related branch:** `claude/content-management-strategy-itoz4j`
 **Question asked:** *Can we write content in Markdown? Can we use a CMS?*
@@ -274,8 +275,8 @@ never changes, so the UI is untouched between phases.
 | --- | --- | --- | --- |
 | 1 | ✅ **Pipeline, no content moved** | `plugins/aceContent.ts` + `src/content/compileLesson.ts` + `src/content/orderLessons.ts`, with unit tests. Nothing user-visible. | S |
 | 2 | ✅ **Lessons → Markdown** | One-shot codemod emitted 32 `.md` files from `curriculum.ts`; a *migration test* proved the compiled output matched the old array field-by-field and paragraph-by-paragraph before the TS file was deleted. `LessonDetail` renders HTML; `index.css` gained styles for the block elements Markdown can now produce. | M |
-| 3 | **Drills → Markdown** | Same shape; `instructions` becomes an ordered list in the body. | S |
-| 4 | **Quizzes → YAML** | `answer:` replaces `correctIndex`, resolved and validated in the loader. | S |
+| 3 | ✅ **Drills → Markdown** | `instructions` became an ordered list in the body. The shared compiler primitives moved to `src/content/compile.ts` and `orderLessons` became the generic `orderContent`. | S |
+| 4 | ✅ **Quizzes → YAML** | `answer:` replaces `correctIndex`, resolved and validated in `compileQuiz`. The compiler also took over the question-shape invariants, so they fail at authoring time. | S |
 | 5 | **Content polish** | Now cash in the win: headings, images, diagrams, cross-links in the lessons that need them. | ongoing |
 | 6 | *(optional)* **CMS** | Sveltia `/admin` + OAuth Worker + `config.yml` mirroring the schema, in editorial-workflow mode so edits open PRs. | M |
 
@@ -293,7 +294,18 @@ never changes, so the UI is untouched between phases.
   would not have.
 - **A scan of all 32 lessons found zero Markdown-sensitive characters** in the prose (no
   `*`, `_`, backticks, leading list markers, `<`, `&`, `|`), so the migration needed no
-  escaping and the round trip is exact.
+  escaping and the round trip is exact. The same scan over the 39 drills found `&` in three
+  titles only — frontmatter values, where YAML quoting handles it.
+- **`instructions: string[]` carried an unwritten invariant**: a drill is a numbered routine,
+  not an essay. Free-form Markdown would have dropped it, so `compileDrill` fails the build
+  on a body with no ordered list. Steps gained emphasis and links in exchange.
+- **Vite transforms `.yml` through the same plugin hook as `.md`** — no extra loader was
+  needed for the quiz files.
+- **`js-yaml` v5 ships its own types**, so no `@types/js-yaml`.
+- **The compilers now enforce most of what `data.test.ts` asserted.** Those tests were kept
+  rather than deleted: they are cheap, they guard the compilers, and the invariants they
+  encode (footwork at every level, the Continental grip always on bevel 2) are curriculum
+  rules that no per-file compiler can see.
 
 **The TDD hinge is phase 2's migration test.** Deep-equality against the current in-memory data
 (modulo prose → HTML) is what makes a 32-file mechanical migration verifiable rather than a
