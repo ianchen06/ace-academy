@@ -73,5 +73,15 @@
     "advanced/a-drill-australian",
     "advanced/a-drill-pressure-points",
     "advanced/a-drill-return-reaction"
+  ],
+  "quizzes": [
+    "beginner/b-quiz-rules",
+    "beginner/b-quiz-fundamentals",
+    "beginner/b-quiz-grips-footwork",
+    "intermediate/i-quiz-strokes",
+    "intermediate/i-quiz-tactics",
+    "intermediate/i-quiz-grips-forehand",
+    "advanced/a-quiz-movement-grips",
+    "advanced/a-quiz-strategy"
   ]
 }

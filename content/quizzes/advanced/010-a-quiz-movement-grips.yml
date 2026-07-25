@@ -1,0 +1,70 @@
+topic: Movement & Grip Adaptation
+title: Elite Movement & Grip Adaptation
+description: First-step reaction, deceleration, recovery geometry, and adapting grips to the ball.
+questions:
+  - id: q1
+    question: After being pulled wide with a crosscourt ball, where should you recover to?
+    options:
+      - Always exactly to the centre mark
+      - To the bisector of the angles your opponent can hit from where they are standing
+      - To the same side you just hit from
+      - As far behind the baseline as possible
+    answer: To the bisector of the angles your opponent can hit from where they are standing
+    explanation: >-
+      Recovery is geometric: the correct spot bisects your opponent's available angles, which after
+      a wide crosscourt ball sits a step or two toward the side you hit to, not on the centre mark.
+  - id: q2
+    question: What is the correct way to decelerate when arriving at a wide ball on a hard court?
+    options:
+      - Brake with a straight outside leg to stop as fast as possible
+      - Plant the outside foot at an angle with a bent knee to absorb the load
+      - Backpedal into position
+      - Jump into the shot with both feet
+    answer: Plant the outside foot at an angle with a bent knee to absorb the load
+    explanation: >-
+      A bent outside leg absorbs and then returns the load, making the push back faster; braking
+      with a straight leg is slower to reverse and is a common injury mechanism.
+  - id: q3
+    question: A ball is hit deep over your head. What is the correct first movement?
+    options:
+      - Backpedal while facing the net
+      - Drop-step with the back foot and turn to run
+      - Side shuffle straight back
+      - Split step again and wait
+    answer: Drop-step with the back foot and turn to run
+    explanation: >-
+      The drop-step turns your hips so you can run rather than backpedal; backpedalling is slow and
+      is how players lose balance on deep balls.
+  - id: q4
+    question: Which situation calls for moving your grip back toward Eastern or Continental?
+    options:
+      - A high, heavy topspin ball above the shoulder
+      - A low, skidding slice or a short low ball you are stepping into
+      - A neutral rally ball at waist height
+      - Any ball hit from behind the baseline
+    answer: A low, skidding slice or a short low ball you are stepping into
+    explanation: >-
+      Flatter grips open the face enough to lift low balls and let you drive a short ball you can
+      step into; extreme grips are for high contact points.
+  - id: q5
+    question: When should a grip change happen during the shot?
+    options:
+      - After the unit turn, once you can see where the ball lands
+      - During the unit turn, with the non-dominant hand holding the racquet at the throat
+      - At the moment of contact
+      - During the follow-through
+    answer: During the unit turn, with the non-dominant hand holding the racquet at the throat
+    explanation: >-
+      The non-dominant hand holds the racquet at the throat while the hitting hand loosens and
+      re-sets, which is what makes a grip change possible in the time a rally allows.
+  - id: q6
+    question: What conditioning structure best matches the demands of tennis movement?
+    options:
+      - Long steady runs of 40 minutes or more
+      - Repeated 6-10 second efforts with 20-30 seconds of recovery
+      - Single maximal sprints with full recovery between each
+      - Static stretching between points
+    answer: Repeated 6-10 second efforts with 20-30 seconds of recovery
+    explanation: >-
+      A point is a short, intense effort followed by a short rest, so training that mirrors that
+      work-to-rest ratio preserves movement quality late in matches.

@@ -36,6 +36,7 @@
     "@vitejs/plugin-react": "^6.0.3",
     "@vitest/coverage-v8": "^4.1.10",
     "gray-matter": "^4.0.3",
+    "js-yaml": "^5.2.2",
     "jsdom": "^29.1.1",
     "markdown-it": "^14.3.0",
     "oxlint": "^1.71.0",

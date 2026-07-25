@@ -8,7 +8,7 @@ import type { LevelId } from '../data/types'
 // real hazard the moment a CMS lets content arrive from outside a reviewed PR.
 const md = new MarkdownIt({ html: false, linkify: true, typographer: false })
 
-const FILENAME = /^(\d+)-(.+)\.md$/
+const FILENAME = /^(\d+)-(.+)\.(?:md|yml)$/
 
 /** Reports a problem the way an author needs to read it: file first, then why. */
 export type Fail = (message: string) => never
@@ -36,7 +36,7 @@ export function identityFromPath(filePath: string, fail: Fail): { id: string; le
 
   const match = FILENAME.exec(filename)
   if (!match) {
-    fail('is missing a numeric ordering prefix — name content files "<order>-<id>.md"')
+    fail('is missing a numeric ordering prefix — name content files "<order>-<id>.<ext>"')
   }
 
   return { id: match![2]!, levelId: levelId as LevelId }

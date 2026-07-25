@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { lessons } from './curriculum'
 import { drills } from './drills'
+import { quizzes } from './quizzes'
 
 /**
  * Content ids are a public contract, not an implementation detail.
@@ -21,6 +22,7 @@ describe('content ids', () => {
     const ids = {
       lessons: lessons.map((lesson) => `${lesson.levelId}/${lesson.id}`),
       drills: drills.map((drill) => `${drill.levelId}/${drill.id}`),
+      quizzes: quizzes.map((quiz) => `${quiz.levelId}/${quiz.id}`),
     }
     await expect(`${JSON.stringify(ids, null, 2)}\n`).toMatchFileSnapshot(
       './__snapshots__/content-ids.json',

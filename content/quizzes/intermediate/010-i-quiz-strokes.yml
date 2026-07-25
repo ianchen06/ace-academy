@@ -1,0 +1,63 @@
+topic: Strokes & Spin
+title: Spin & Stroke Mechanics
+description: How well do you understand topspin, slice, and the volley?
+questions:
+  - id: q1
+    question: What racquet path and effect defines a slice shot?
+    options:
+      - Low-to-high path, creating topspin that dips the ball down
+      - High-to-low path, creating backspin that makes the ball skid and stay low
+      - A perfectly flat path with no vertical movement
+      - A circular path that creates sidespin only
+    answer: High-to-low path, creating backspin that makes the ball skid and stay low
+    explanation: >-
+      Slice uses a high-to-low path and an open racquet face to create backspin, making the ball
+      float and skid low off the bounce.
+  - id: q2
+    question: Why is topspin useful for consistency during rallies?
+    options:
+      - It makes the ball travel in a straight line with no arc
+      - >-
+        It causes the ball to dip down into the court, allowing a harder swing with more margin over
+        the net
+      - It slows the ball down so much that it barely clears the net
+      - It has no effect on where the ball lands
+    answer: >-
+      It causes the ball to dip down into the court, allowing a harder swing with more margin over
+      the net
+    explanation: >-
+      Topspin makes the ball curve downward into the court, so players can swing harder while still
+      keeping shots in play.
+  - id: q3
+    question: What grip is typically used for both forehand and backhand volleys?
+    options:
+      - Eastern forehand for both
+      - Semi-Western for both
+      - Continental grip for both
+      - A different grip for each side
+    answer: Continental grip for both
+    explanation: >-
+      The Continental grip works for both forehand and backhand volleys, avoiding the need to change
+      grips at net.
+  - id: q4
+    question: For a right-handed player, where should the toss go to hit a kick serve?
+    options:
+      - Directly in front and to the right, same as a flat serve
+      - Behind the head and slightly to the left
+      - Far to the right and low
+      - It doesn't matter — toss location has no effect on serve type
+    answer: Behind the head and slightly to the left
+    explanation: >-
+      A kick serve toss is placed more behind the head and to the left (for a right-hander),
+      enabling the low-to-high brushing motion that creates heavy topspin.
+  - id: q5
+    question: Between crosscourt and down-the-line shots, which generally offers more margin for error?
+    options:
+      - Down the line, because it is a shorter distance
+      - Crosscourt, because it travels a longer distance over a lower part of the net
+      - They offer exactly the same margin
+      - Neither — margin depends only on power, not direction
+    answer: Crosscourt, because it travels a longer distance over a lower part of the net
+    explanation: >-
+      Crosscourt shots cross the net at its lowest point and travel a longer diagonal distance,
+      giving more margin than down-the-line shots.
