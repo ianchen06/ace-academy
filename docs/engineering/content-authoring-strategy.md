@@ -1,7 +1,7 @@
 # Content Authoring Strategy — Markdown, and (maybe) a CMS
 
-**Status:** Accepted. **Phases 1–4 implemented** — all curriculum content is now authored in
-`content/`. Phases 5 (content polish) and 6 (optional CMS) outstanding.
+**Status:** Accepted. **Phases 1–5 under way** — all curriculum content is authored in `content/`,
+and cross-links work. Phase 5 is ongoing editorial work; phase 6 (optional CMS) outstanding.
 **Date:** 2026-07-25
 **Related branch:** `claude/content-management-strategy-itoz4j`
 **Question asked:** *Can we write content in Markdown? Can we use a CMS?*
@@ -279,7 +279,7 @@ never changes, so the UI is untouched between phases.
 | 2 | ✅ **Lessons → Markdown** | One-shot codemod emitted 32 `.md` files from `curriculum.ts`; a *migration test* proved the compiled output matched the old array field-by-field and paragraph-by-paragraph before the TS file was deleted. `LessonDetail` renders HTML; `index.css` gained styles for the block elements Markdown can now produce. | M |
 | 3 | ✅ **Drills → Markdown** | `instructions` became an ordered list in the body. The shared compiler primitives moved to `src/content/compile.ts` and `orderLessons` became the generic `orderContent`. | S |
 | 4 | ✅ **Quizzes → YAML** | `answer:` replaces `correctIndex`, resolved and validated in `compileQuiz`. The compiler also took over the question-shape invariants, so they fail at authoring time. | S |
-| 5 | **Content polish** | Now cash in the win: headings, images, diagrams, cross-links in the lessons that need them. | ongoing |
+| 5 | 🔄 **Content polish** | Cross-link plumbing done (`CompiledContent` + a dead-link invariant), and two lessons restructured as a worked example. The rest is editorial: headings, images and diagrams in the lessons that need them. | ongoing |
 | 6 | *(optional)* **CMS** | Sveltia `/admin` + OAuth Worker + `config.yml` mirroring the schema, in editorial-workflow mode so edits open PRs. | M |
 
 ### Notes from the phases 1–2 implementation
@@ -317,6 +317,20 @@ hope. It is written first, fails, then the codemod makes it pass, and it is dele
 Coverage note: `vitest.config.ts` excludes `src/data/**` because it is content. The new loader
 and schema are **logic**, which is why they live in `src/content/` — the 90% thresholds should
 apply to them. Only the `content/` directory (data) stays out.
+
+### Cross-links (phase 5)
+
+Compiled content is injected HTML, so a Markdown link is a plain `<a href>` that React Router
+cannot see: clicking it would be a full browser navigation, re-downloading the bundle and
+discarding app state. `src/components/CompiledContent.tsx` intercepts those clicks and hands
+same-origin paths to the router, while leaving modifier-clicks, `target`-ed links and external
+hosts to the browser. The e2e test asserts this by setting a marker on `window` before the
+click and checking it survived.
+
+Link *integrity* cannot be a compiler check — each compiler sees one file, and the target of
+`/curriculum/beginner/b-grip` lives in another. It is a `data.test.ts` invariant instead, which
+also closes the other half of the rename hazard: `contentIds.test.ts` catches the renamed file,
+the link test catches everything that pointed at it.
 
 ## 7. Open questions for you
 

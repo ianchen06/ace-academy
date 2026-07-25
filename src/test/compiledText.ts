@@ -13,14 +13,24 @@ function parse(html: string | undefined): HTMLDivElement {
   return host
 }
 
+/** The text of every element matching `selector`, in document order. */
+export function renderedElements(html: string | undefined, selector: string): string[] {
+  return [...parse(html).querySelectorAll(selector)].map((el) => el.textContent ?? '')
+}
+
 /** Every prose block — paragraphs and list items alike — as plain text. */
 export function renderedBlocks(html: string | undefined): string[] {
-  return [...parse(html).querySelectorAll('p, li')].map((el) => el.textContent ?? '')
+  return renderedElements(html, 'p, li')
+}
+
+/** Every in-app link target in the content, as an absolute app path. */
+export function internalLinks(html: string | undefined): string[] {
+  return [...parse(html).querySelectorAll('a[href^="/"]')].map((el) => el.getAttribute('href')!)
 }
 
 /** Just the paragraphs, for assertions about how a page is rendered. */
 export function renderedParagraphs(html: string | undefined): string[] {
-  return [...parse(html).querySelectorAll('p')].map((el) => el.textContent ?? '')
+  return renderedElements(html, 'p')
 }
 
 /** The whole body as one searchable string. */

@@ -170,6 +170,10 @@ every user who takes the quiz.
 - **Validation runs on the node side**, inside the plugin, so bad content fails `dev`,
   `build` and `vitest` with the file path and a reason — and no parser or validator reaches
   the browser bundle.
+- **Cross-links are absolute app paths**: `[the grip](/curriculum/beginner/b-grip)`. They go
+  through the router via `CompiledContent`, so they navigate without reloading the app, and
+  `data.test.ts` fails if one points at a route that does not exist. Compilers see one file
+  at a time, so link integrity is necessarily a test rather than a build check.
 
 ## Architecture notes
 

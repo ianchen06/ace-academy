@@ -49,6 +49,28 @@ test.describe('browsing the curriculum', () => {
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Curriculum')
   })
 
+  // Lesson prose is compiled Markdown injected as HTML, so a cross-link is a
+  // plain <a href> that React Router cannot see. Left alone it would be a full
+  // browser navigation: bundle re-downloaded, app state discarded. The marker
+  // on `window` is the assertion that never happened.
+  test('a cross-link inside a lesson navigates without reloading the app', async ({ page }) => {
+    await page.goto('/curriculum/beginner/b-forehand-eastern')
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Step by Step: The Eastern Forehand')
+
+    await page.evaluate(() => {
+      ;(window as unknown as { survivedNavigation: boolean }).survivedNavigation = true
+    })
+
+    await page.getByRole('link', { name: 'Choosing Your Forehand Grip' }).click()
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Choosing Your Forehand Grip')
+    await expect(page).toHaveURL(/\/curriculum\/beginner\/b-grip-selection$/)
+
+    const survived = await page.evaluate(
+      () => (window as unknown as { survivedNavigation?: boolean }).survivedNavigation,
+    )
+    expect(survived).toBe(true)
+  })
+
   test('an unknown URL shows the 404 page', async ({ page }) => {
     await page.goto('/no-such-page')
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('404')

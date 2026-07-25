@@ -3,6 +3,7 @@ import { levelById } from '../data/levels'
 import { lessons } from '../data/curriculum'
 import { drills } from '../data/drills'
 import { useProgress } from '../hooks/useProgress'
+import { CompiledContent } from '../components/CompiledContent'
 
 export function LessonDetail() {
   const { levelId, lessonId } = useParams<{ levelId: string; lessonId: string }>()
@@ -35,13 +36,7 @@ export function LessonDetail() {
       <h1>{lesson.title}</h1>
       <p className="page-intro">{lesson.summary}</p>
 
-      {/*
-        `lesson.html` is compiled at build time from `content/lessons/**` by the
-        ace-content Vite plugin, with markdown-it configured `html: false` so raw
-        tags in the source are escaped rather than passed through. If content ever
-        arrives from outside a reviewed PR (a CMS), sanitise in the plugin.
-      */}
-      <div className="lesson-content" dangerouslySetInnerHTML={{ __html: lesson.html }} />
+      <CompiledContent html={lesson.html} className="lesson-content" />
 
       {lesson.tips.length > 0 && (
         <div className="tips-box">
