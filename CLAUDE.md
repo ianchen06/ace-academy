@@ -49,7 +49,8 @@ would silently mark correct quiz answers wrong for every user.
 
 **Unit + component** (`src/**/*.test.tsx`, Vitest + Testing Library, jsdom) — contexts,
 hooks, components and pages. Coverage thresholds are **90%** on lines, branches, functions
-and statements; `src/data/**` is excluded because it is content, not logic.
+and statements; `src/data/**` is excluded because it is content, not logic. The content
+*pipeline* in `src/content/**` is logic and is covered like everything else.
 
 **End-to-end** (`e2e/`, Playwright + Chromium) — real user journeys against a production
 build served by `vite preview`.
@@ -95,9 +96,51 @@ Never hit a real Supabase project from tests.
    Covered by "never overwrites the cloud row after a failed read" and the e2e
    "the app stays usable when the backend read fails".
 
+## Authoring lessons
+
+Lesson prose lives in `content/lessons/<level>/<order>-<id>.md`. The strategy and the
+remaining phases (drills, quizzes, an optional git-backed CMS) are in
+`docs/engineering/content-authoring-strategy.md`.
+
+```markdown
+---
+category: Fundamentals          # required
+title: The Grip                 # required
+summary: One line for the card. # required
+tips:                           # required, at least one
+  - Coaching tip shown in the tips box.
+drills: [b-drill-grip-shadow]   # optional, must be drills from the same level
+---
+
+Body is Markdown: headings, lists, **bold**, links, images, tables, blockquotes.
+```
+
+Rules the pipeline enforces, and why:
+
+- **The filename is the identity.** `010-b-grip.md` means order `010`, id `b-grip`. Ids are
+  persisted in user progress, so **renaming a file wipes that lesson's completions for every
+  existing user** — `lessonIds.test.ts` snapshots the id set so a rename is a visible,
+  deliberate diff rather than an accident.
+- **Order is the numeric prefix**, in steps of 10 so a lesson can be inserted without
+  renaming its neighbours. Duplicate prefixes within a level fail the build.
+- **Unknown frontmatter keys fail the build.** A typo'd `tip:` would otherwise silently
+  publish a lesson with no coaching tips.
+- **Markdown is rendered at build time** by the `ace-content` Vite plugin, never in the
+  browser, with `html: false` — raw tags in a lesson are escaped, not passed through. If
+  content ever arrives from outside a reviewed PR (a CMS), sanitise in the plugin, because
+  `LessonDetail` injects the compiled HTML.
+- **Drills and quizzes are still TypeScript** (`src/data/drills.ts`, `src/data/quizzes.ts`).
+  They are phases 3–4 of the migration.
+
 ## Architecture notes
 
-- `src/data/` — static curriculum: levels, lessons, drills, quizzes. Pure content.
+- `content/lessons/` — lesson prose, authored as Markdown with YAML frontmatter, one file
+  per lesson at `<level>/<order>-<id>.md`. See "Authoring lessons" below.
+- `src/content/` — the content pipeline: `compileLesson` (frontmatter validation + Markdown
+  render) and `orderLessons` (curriculum order from filename prefixes). Logic, not content.
+- `plugins/aceContent.ts` — the Vite plugin that runs the compile at build time.
+- `src/data/` — the curriculum the app consumes: `levels`, `lessons` (globbed from
+  `content/lessons/`), `drills`, `quizzes`. Still pure content.
 - `src/context/` — `AuthContext` (Supabase session) and `ProgressContext` (local-first
   progress with cloud merge). Context objects live in separate `*ContextDef.ts` files so the
   provider modules stay fast-refresh friendly.

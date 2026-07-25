@@ -1,6 +1,6 @@
 # Content Authoring Strategy — Markdown, and (maybe) a CMS
 
-**Status:** Proposal for decision — nothing implemented yet
+**Status:** Accepted. **Phases 1–2 implemented** (lessons are Markdown); phases 3–6 outstanding.
 **Date:** 2026-07-25
 **Related branch:** `claude/content-management-strategy-itoz4j`
 **Question asked:** *Can we write content in Markdown? Can we use a CMS?*
@@ -140,12 +140,12 @@ content/
       ...
   levels.yml
 src/
-  content/            # the loader + schema (logic — coverage applies)
-    schema.ts
-    load.ts
+  content/            # the pipeline (logic — coverage applies)
+    compileLesson.ts  # frontmatter validation + markdown render
+    orderLessons.ts   # curriculum order from filename prefixes
   data/               # unchanged public API: `lessons`, `drills`, `quizzes`, `levels`
 plugins/
-  markdown.ts         # Vite plugin: frontmatter + markdown → module (node-side, tested)
+  aceContent.ts       # Vite plugin: runs the compile at build time (node-side)
 ```
 
 `src/data/*` keeps exporting the same arrays with the same types, so **no page, hook or
@@ -187,23 +187,23 @@ dev, `vite build` and the Playwright preview all use the identical pipeline — 
 no generated files to commit, no drift.
 
 ```ts
-// plugins/markdown.ts (sketch)
-export function contentPlugin(): Plugin {
+// plugins/aceContent.ts (as implemented)
+export function aceContent(): Plugin {
   return {
     name: 'ace-content',
+    enforce: 'pre',
     transform(code, id) {
-      if (!id.endsWith('.md')) return
-      const { data, content } = matter(code)          // gray-matter
-      const frontmatter = parseLessonFrontmatter(data, id) // throws with the file path
-      const html = md.render(content)                  // markdown-it
-      return `export default ${JSON.stringify({ ...frontmatter, html })}`
+      const path = id.split('?')[0]!
+      if (!path.endsWith('.md') || !path.includes('/content/lessons/')) return null
+      return { code: `export default ${JSON.stringify(compileLesson(code, path))}`, map: null }
     },
   }
 }
 ```
 
-`src/content/load.ts` collects them with `import.meta.glob('/content/lessons/**/*.md', { eager: true })`
-and returns typed arrays.
+`src/data/curriculum.ts` collects them with
+`import.meta.glob('/content/lessons/**/*.md', { eager: true, import: 'default' })`
+and hands them to `orderLessons`.
 
 **Validation runs in the plugin, on the node side.** Invalid frontmatter fails `vite build`,
 `vitest` and `npm run dev` with a file path and a reason — and no validator ships to the browser.
@@ -212,7 +212,7 @@ and returns typed arrays.
 
 Today, lesson order = array order, and `LessonDetail` derives prev/next from it. Glob results
 are alphabetical, so ordering becomes a **filename convention**: zero-padded numeric prefixes
-(`010-grip.md`), stripped when deriving the id. Gaps of 10 make inserting a lesson a one-file
+(`010-b-grip.md`), stripped when deriving the id. Gaps of 10 make inserting a lesson a one-file
 change. A data test asserts prefixes are unique within a level and that every level's sequence
 is strictly increasing.
 
@@ -222,9 +222,10 @@ Lesson/drill/quiz ids are persisted in `localStorage` under `tennis-coach-progre
 the Supabase `progress` row. Deriving ids from filenames means *renaming a file silently
 destroys that item's completion state for every existing user.*
 
-Mitigation: derive the id from the filename (minus the numeric prefix), and check in a snapshot
-of the full id set (`toMatchFileSnapshot`). Any rename then shows up as a red diff that a
-reviewer must consciously accept, instead of slipping through as "just a file rename".
+Mitigation, now implemented in `src/data/lessonIds.test.ts`: derive the id from the filename
+(minus the numeric prefix), and check in a snapshot of the full id set (`toMatchFileSnapshot`).
+Any rename then shows up as a red diff that a reviewer must consciously accept, instead of
+slipping through as "just a file rename".
 
 ### 5.6 Quizzes deserve better than an index
 
@@ -271,12 +272,28 @@ never changes, so the UI is untouched between phases.
 
 | # | Phase | What lands | Effort |
 | --- | --- | --- | --- |
-| 1 | **Pipeline, no content moved** | `plugins/markdown.ts` + `src/content/schema.ts` with node-side unit tests; one throwaway fixture lesson proves the round trip. Nothing user-visible. | S |
-| 2 | **Lessons → Markdown** | One-shot codemod emits 32 `.md` files from `curriculum.ts`; a *migration test* asserts the loaded output deep-equals the old array before the TS file is deleted. `LessonDetail` renders HTML. | M |
+| 1 | ✅ **Pipeline, no content moved** | `plugins/aceContent.ts` + `src/content/compileLesson.ts` + `src/content/orderLessons.ts`, with unit tests. Nothing user-visible. | S |
+| 2 | ✅ **Lessons → Markdown** | One-shot codemod emitted 32 `.md` files from `curriculum.ts`; a *migration test* proved the compiled output matched the old array field-by-field and paragraph-by-paragraph before the TS file was deleted. `LessonDetail` renders HTML; `index.css` gained styles for the block elements Markdown can now produce. | M |
 | 3 | **Drills → Markdown** | Same shape; `instructions` becomes an ordered list in the body. | S |
 | 4 | **Quizzes → YAML** | `answer:` replaces `correctIndex`, resolved and validated in the loader. | S |
 | 5 | **Content polish** | Now cash in the win: headings, images, diagrams, cross-links in the lessons that need them. | ongoing |
 | 6 | *(optional)* **CMS** | Sveltia `/admin` + OAuth Worker + `config.yml` mirroring the schema, in editorial-workflow mode so edits open PRs. | M |
+
+### Notes from the phases 1–2 implementation
+
+- **Prose is emitted one paragraph per line, unwrapped.** Hard-wrapping would make diffs
+  nicer, but markdown-it renders a soft line break as `\n` inside the paragraph, which would
+  have made the migration's text comparison inexact. Correctness won; revisit if diffs annoy.
+- **`tsconfig.node.json` moved from `nodenext` to `esnext` + `bundler` resolution.** The Vite
+  config now imports the plugin, which imports the compiler from `src/`, and `nodenext`
+  demands explicit file extensions the rest of the codebase does not use.
+- **The compiled prose is read back through the DOM in tests** (`src/test/lessonText.ts`), so
+  the content invariants in `data.test.ts` still assert on the words a reader sees. They now
+  survive a lesson being rewritten with headings or lists, which the old `string[]` checks
+  would not have.
+- **A scan of all 32 lessons found zero Markdown-sensitive characters** in the prose (no
+  `*`, `_`, backticks, leading list markers, `<`, `&`, `|`), so the migration needed no
+  escaping and the round trip is exact.
 
 **The TDD hinge is phase 2's migration test.** Deep-equality against the current in-memory data
 (modulo prose → HTML) is what makes a 32-file mechanical migration verifiable rather than a
