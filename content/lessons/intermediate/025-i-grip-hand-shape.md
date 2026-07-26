@@ -16,11 +16,19 @@ Any of the four grips can be held either way.
 
 ## The two hand shapes
 
-The bunched hand is the **hammer grip**: fingers together, the hand working as a single block, held the way you would hold a hammer.
+The bunched hand is often called the **hammer grip**: fingers together, the hand working as a single block, held the way you would hold a hammer.
 
-The spread hand is the **pistol grip**: the index finger separates from the middle finger and lies diagonally up the handle, its pad resting a little above the base knuckle, so the hand sits on the racquet like a trigger finger.
+The spread hand is the **pistol grip**, or the trigger finger: the index finger separates from the other three and stays bent, as though squeezing a trigger, with a small gap between it and the middle finger.
 
-Neither of these is a grip in the sense the rest of the curriculum uses the word.
+The usual way to get this wrong is to straighten that finger and lay it flat up the handle.
+That is a weaker hold, not a stronger one — the finger wants to be separated and curled, not extended.
+
+A warning about the words themselves.
+"Hammer grip" gets used two different ways in tennis: most often as a plain synonym for Continental, and sometimes — as in this lesson — for bunched fingers.
+That ambiguity is most of the reason this lesson exists.
+When you meet either term elsewhere, work out which of the two questions the writer is answering before you change anything.
+
+Neither shape is a grip in the sense the rest of the curriculum uses the word.
 You do not choose between Eastern and one of them — you choose Eastern *and* one of them.
 
 ## What spreading buys you
@@ -36,22 +44,45 @@ On the forehand it earns its place a third way.
 With [the more closed grips](/curriculum/intermediate/i-grip-effects) contact is high and in front and you are brushing steeply up the back of the ball, and a spread finger supports the face through that brush.
 A fully bunched hand on a Western forehand tends to feel as though the face collapses against a heavy ball.
 
-## Why the bunched hand survives
+## The serve, where the intuition misleads
 
-A compact hand lets the forearm rotate more freely and the wrist lag longer, and that is racquet head speed.
-The classic fault is a server who holds too much like a trigger finger and then unconsciously braces the wrist to push the racquet with that index finger, which kills the pronation the serve is built on.
-Plenty of players with very large flat serves hold the handle bunched, and they are not doing it by accident.
+It is natural to assume the compact hand must be the faster one, because a fist looks like it would whip.
+Coaching opinion runs the other way.
+Crowded fingers make the frame harder to steer, and a slight separation gives you more control of the racquet head — which matters most when you are changing the face angle between a flat, a slice and a kick delivery.
+That separation is generally described as helping the forearm rotate rather than hindering it: not because the hand supplies speed, but because a hand that is not clamped lets the rotation happen.
 
-Treat this as a trade between control and racquet head speed, not as a technique with a right answer.
-The net and the second serve pull one way; the flat first serve pulls the other.
+What actually costs you pronation is squeezing, and the straightened finger described above, which turns the hand into a brace that pushes the racquet instead of releasing it.
+So the fault to watch for is not spreading too far — it is spreading into a stiff arm.
 
-## Grip size is part of the same question
+How much separation suits you is individual, and worth experimenting with rather than copying from a photograph.
 
-A spread index finger needs more usable handle length than a bunched one.
-An oversized grip forces your fingers back together whatever you meant to do, and the standard sizing check — a finger's width between your fingertips and the heel of your palm — quietly assumes a bunched hand in the first place.
-Players who spread often sit half a size below what that check gives them.
+## Grip size interacts with this
 
-An oversized handle held bunched is also a well-worn route into forearm tightness, because you make up for the poor brace by squeezing — the opposite of the relaxed pressure [the grip](/curriculum/beginner/b-grip) asks for.
+The standard sizing check is the gap test: take an Eastern grip, wrap your fingers naturally, and slide the index finger of your other hand into the gap between your fingertips and the heel of your palm.
+A snug fit is the right size, no room means the handle is too small, and slack means it is too big.
+
+Two things follow that matter here.
+A handle that is too big pushes your fingers together whatever shape you meant to hold, so a hand that will not spread is sometimes a sizing problem rather than a preference.
+A handle that is too small fails the opposite way: you squeeze to keep control and the racquet still turns on off-centre contact, which is the very thing a spread hand is meant to prevent.
+
+If you fall between two sizes, take the smaller one and build it up with an overgrip — adding material is easy, removing it is not.
+Either way, squeezing to make up for a badly sized handle is the opposite of the relaxed pressure [the grip](/curriculum/beginner/b-grip) asks for.
+
+## What the tour actually shows, and what it does not
+
+Be careful what you conclude from watching professionals here, because this is far less documented than grip position.
+
+The grip picture is clear enough.
+Djokovic, Nadal, Sinner and Alcaraz all play the forehand from a semi-western hold, and Federer's sat between eastern and semi-western.
+Those placements are photographed, argued over and easy to check.
+
+The finger picture is not.
+Analysis of professional technique overwhelmingly discusses where the knuckle sits and says very little about finger spacing, and at least one instructional source puts spacing well below grip position and swing pattern in importance.
+Where it is described at all it tends toward a small separation rather than either extreme: Djokovic's index finger is usually described as slightly split from the other three, and Milos Raonic is cited for a noticeably spread index finger on the serve.
+
+Treat that as weak evidence, and treat any confident claim that the tour has settled on one hand shape as weaker still.
+The honest summary is that grip position is a real, visible, well-recorded decision, while finger spacing is a smaller adjustment that varies between players and is rarely written down.
+That is a reason to test it on your own racquet, not a reason to ignore it.
 
 ## Where there is no choice to make
 
