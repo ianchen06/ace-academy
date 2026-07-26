@@ -23,6 +23,13 @@ export function failFor(filePath: string): Fail {
  * Identity comes from the path, never the frontmatter, so an id cannot drift
  * from the file that defines it. Ids are persisted in user progress, which is
  * why `src/data/contentIds.test.ts` snapshots them.
+ *
+ * Every id also carries its level's initial (`b-grip`, `i-topspin`, `a-approach`).
+ * That was a convention every one of the 79 content files already followed but
+ * nothing checked, so an author — or an agent — moving a file between levels
+ * without renaming it produced an id that lies about where it lives. Ids are
+ * user-visible in URLs and load-bearing in progress keys, so the mismatch is
+ * worth failing the build over rather than leaving to review.
  */
 export function identityFromPath(filePath: string, fail: Fail): { id: string; levelId: LevelId } {
   const segments = filePath.split('/')
@@ -39,7 +46,16 @@ export function identityFromPath(filePath: string, fail: Fail): { id: string; le
     fail('is missing a numeric ordering prefix — name content files "<order>-<id>.<ext>"')
   }
 
-  return { id: match![2]!, levelId: levelId as LevelId }
+  const id = match![2]!
+  const expected = `${levelId![0]}-`
+  if (!id.startsWith(expected)) {
+    fail(
+      `has the id "${id}", but lives in "${levelId}/" — ids start with their level's ` +
+        `initial, so this one should be named "${expected}${id.replace(/^[a-z]-/, '')}"`,
+    )
+  }
+
+  return { id, levelId: levelId as LevelId }
 }
 
 /**
