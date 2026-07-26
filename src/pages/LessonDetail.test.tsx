@@ -27,10 +27,19 @@ describe('LessonDetail', () => {
     expect(screen.getByText(first.summary)).toBeInTheDocument()
   })
 
+  // Matched against the whole paragraph rather than a single text node: prose
+  // carries in-app cross-links, so a paragraph is routinely split across an
+  // `<a>` and the text either side of it, which the default matcher cannot see
+  // past. Comparing the `<p>`'s own collapsed text asserts the same thing —
+  // every word of the paragraph reached the screen — without caring how the
+  // inline markup happens to divide it up.
+  const paragraphReading = (text: string) => (_: string, element: Element | null) =>
+    element?.tagName === 'P' && (element.textContent ?? '').replace(/\s+/g, ' ').trim() === text
+
   it('renders every paragraph of the compiled lesson prose', () => {
     renderLesson('beginner', first.id)
     for (const para of renderedParagraphs(first.html)) {
-      expect(screen.getByText(para)).toBeInTheDocument()
+      expect(screen.getByText(paragraphReading(para))).toBeInTheDocument()
     }
   })
 

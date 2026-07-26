@@ -11,6 +11,8 @@ drills:
 ---
 
 A volley is hit before the ball bounces, almost always with a Continental grip so you don't need to change grips between forehand and backhand volleys.
+Because a volley blocks the ball rather than swinging at it, how your fingers spread along the handle matters here as much as where your knuckle sits: separating the index finger — the pistol grip — braces the racquet against twisting on off-centre contact, which is most of what goes wrong at the net.
+[Where your fingers sit on the handle](/curriculum/intermediate/i-grip-hand-shape) covers the trade-off in full.
 
 The motion is a short punch, not a swing: take the racquet back just past your shoulder, step into the ball, and block/punch forward with a firm wrist, contacting the ball out in front of your body.
 

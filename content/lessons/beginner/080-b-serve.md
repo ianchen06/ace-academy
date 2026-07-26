@@ -13,6 +13,9 @@ drills:
 Stand behind the baseline, feet in a comfortable stance angled toward the net post, Continental grip.
 Hold the ball gently in your fingertips (not palm) on your non-dominant hand.
 
+How your fingers spread along the handle changes the serve too: separating the index finger buys feel for the racquet face, while keeping them together frees the forearm to rotate.
+That is a refinement to come back to once the motion is grooved — [where your fingers sit on the handle](/curriculum/intermediate/i-grip-hand-shape) has the detail.
+
 Toss the ball slightly in front of and above your head using a smooth, straight-arm lift — not a flick of the wrist.
 A consistent toss is the single biggest factor in a reliable serve.
 

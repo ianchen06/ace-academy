@@ -15,7 +15,8 @@ The most common beginner-friendly grip is the Continental grip for serves and vo
 To find an Eastern forehand grip, hold the racquet like you are shaking hands with it: place your palm flat against the strings, then slide your hand down to the handle.
 The base knuckle of your index finger should sit on the third bevel of the octagonal handle.
 
-For the Continental grip (used for serves, volleys, and overheads), rotate slightly counter-clockwise from Eastern so the base knuckle sits on the second bevel — often called the "hammer grip" because you hold it like you would hold a hammer.
+For the Continental grip (used for serves, volleys, and overheads), rotate slightly counter-clockwise from Eastern so the base knuckle sits on the second bevel.
+You will hear Continental called the "hammer grip", but that nickname really describes bunching your fingers together along the handle rather than where your knuckle sits, and it is a separate choice you can make with any grip — see [where your fingers sit on the handle](/curriculum/intermediate/i-grip-hand-shape).
 
 Grip pressure matters as much as grip style.
 Hold the racquet firmly enough to control it, but relaxed — like holding a small bird.

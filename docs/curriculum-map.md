@@ -74,12 +74,14 @@ First steps on the court
 
 Building consistency and control
 
-### Lessons (12)
+### Lessons (13)
 
 - **010 · i-topspin** — Adding Topspin · Strokes · drills: i-drill-topspin-target, i-drill-shadow-swing
   Swing shape and racquet path that create margin and control.
 - **020 · i-grip-effects** — How Grip Changes the Forehand · Strokes · drills: i-drill-grip-compare
   Contact point, swing path, strike zone and finish all move when your hand moves one bevel.
+- **025 · i-grip-hand-shape** — Where Your Fingers Sit on the Handle · Strokes · drills: i-drill-grip-spread
+  Bunched or spread — the grip choice that has nothing to do with which bevel you hold.
 - **030 · i-forehand-semi-western** — Step by Step: The Semi-Western Topspin Forehand · Strokes · drills: i-drill-semi-western-highball, i-drill-topspin-target
   The modern rally forehand, checkpoint by checkpoint.
 - **040 · i-forehand-eastern-federer** — Pro Technique: The Federer-Style Eastern Forehand · Strokes · drills: i-drill-federer-take-rise
@@ -101,12 +103,14 @@ Building consistency and control
 - **120 · i-doubles-basics** — Doubles Positioning Basics · Doubles · drills: i-drill-doubles-poach
   Working with a partner using up-and-back or two-back formations.
 
-### Drills (17)
+### Drills (18)
 
 - **010 · i-drill-topspin-target** — Topspin Target Rally · Forehand · 15 minutes · Racquet, balls, cones or targets, a partner or feeder
   Add controlled topspin while hitting to a target.
 - **020 · i-drill-grip-compare** — Eastern vs Semi-Western Comparison · Forehand · 20 minutes · Racquet, balls, a feeder, chalk or a towel as a contact marker
   Feel how one bevel of grip change moves the contact point and changes the ball flight.
+- **025 · i-drill-grip-spread** — Bunched vs Spread Hand Test · Fundamentals · 15 minutes · Racquet, balls, a partner or feeder
+  Find out whether spreading your index finger up the handle steadies your racquet, using deliberate off-centre contact as the test.
 - **030 · i-drill-semi-western-highball** — Semi-Western High-Ball Windshield Wipers · Forehand · 15 minutes · Racquet, balls, a feeder or ball machine
   Groove the steep low-to-high path and across-the-body finish of the Semi-Western forehand.
 - **040 · i-drill-federer-take-rise** — Take It Early: Rise-Ball Drill · Forehand · 15 minutes · Racquet, balls, a feeder or ball machine
@@ -144,7 +148,7 @@ Building consistency and control
   How well do you understand topspin, slice, and the volley?
 - **020 · i-quiz-tactics** — Shot Selection & Doubles Basics · Tactics & Doubles · 4 questions
   Decision-making during rallies and doubles positioning.
-- **030 · i-quiz-grips-forehand** — How Grip Changes the Forehand · Grips & Forehand Technique · 6 questions
+- **030 · i-quiz-grips-forehand** — How Grip Changes the Forehand · Grips & Forehand Technique · 7 questions
   Contact point, swing path, strike zone and stance selection.
 
 ## Advanced

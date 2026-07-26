@@ -250,6 +250,47 @@ describe('grip coverage', () => {
   })
 })
 
+// Where the base knuckle sits around the octagon and where the fingers sit
+// along the handle are independent choices: any of the four grips can be held
+// bunched or with the index finger spread. The curriculum taught only the first
+// axis, while `b-grip` called Continental "the hammer grip" — which quietly
+// spends the word "hammer" on a bevel position and leaves a reader meeting
+// "pistol grip" elsewhere to assume it must be some fifth bevel.
+describe('grip hand-shape coverage', () => {
+  const HAND_SHAPE_PATH = '/curriculum/intermediate/i-grip-hand-shape'
+  const handShape = lessons.find((l) => l.id === 'i-grip-hand-shape')
+  const handShapeTerm = /hammer|pistol/i
+
+  it('has a lesson on where the fingers sit along the handle', () => {
+    expect(handShape).toBeDefined()
+  })
+
+  it('names both hand shapes in the hand-shape lesson', () => {
+    const text = renderedText(handShape?.html)
+    expect(text).toMatch(/hammer/i)
+    expect(text).toMatch(/pistol/i)
+  })
+
+  it('keeps the hand shapes off the bevel axis', () => {
+    const numberedBevel = /bevel \d|(?:first|second|third|fourth|fifth|sixth|seventh|eighth) bevel/i
+    for (const lesson of lessons) {
+      for (const sentence of renderedBlocks(lesson.html).flatMap((block) => block.split(/(?<=\.)\s+/))) {
+        if (handShapeTerm.test(sentence)) {
+          expect(sentence, `lesson ${lesson.id}`).not.toMatch(numberedBevel)
+        }
+      }
+    }
+  })
+
+  it('sends every other mention of a hand shape to the lesson that explains it', () => {
+    for (const lesson of lessons) {
+      if (lesson.id === handShape?.id) continue
+      if (!handShapeTerm.test(renderedText(lesson.html))) continue
+      expect(internalLinks(lesson.html), `lesson ${lesson.id}`).toContain(HAND_SHAPE_PATH)
+    }
+  })
+})
+
 describe('grip and footwork quizzes', () => {
   it('checks grip or footwork understanding at every level', () => {
     for (const id of levelIds) {
